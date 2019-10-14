@@ -252,8 +252,9 @@ contract _HERTZ is ERC20Interface, Owned{
     // - 0 value transfers are allowed
     // ------------------------------------------------------------------------
     function transfer(address to, uint tokens) public returns(bool success) {
-        require(balances[msg.sender] >= tokens && tokens > 0);
-        require(address(to)!=address(0));
+        require(balances[msg.sender] >= tokens && tokens > 0, "Zero transfer or not enough funds");
+        require(address(to)!=address(0),"No burning allowed");
+        require(address(msg.sender)!=address(0),"You can't mint this token, purchase it instead");
         
         uint burn = tokens.div(100); //1% burn
         uint send = tokens.sub(burn);
@@ -301,9 +302,11 @@ contract _HERTZ is ERC20Interface, Owned{
     // ------------------------------------------------------------------------
 
     function transferFrom(address from, address to, uint tokens) public returns(bool) {
-        require (balances[from] >= tokens && allowed[from][msg.sender] >= tokens && tokens > 0);
-        require(address(to)!=address(0));
-        
+ 
+        require (balances[from] >= tokens && allowed[from][msg.sender] >= tokens && tokens > 0, "Zero transfer or not enough (allowed) funds");
+        require(address(to)!=address(0),"No burning allowed");
+        require(address(from)!=address(0),"You can't mint this token, purchase it instead");
+
         uint burn = tokens.div(100); //1% burn
         uint send = tokens.sub(burn);
         _transferFrom(from, to, send);
