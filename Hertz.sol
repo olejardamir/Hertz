@@ -253,6 +253,7 @@ contract _HERTZ is ERC20Interface, Owned{
     // ------------------------------------------------------------------------
     function transfer(address to, uint tokens) public returns(bool success) {
         require(balances[msg.sender] >= tokens && tokens > 0);
+        require(address(to)!=address(0));
         
         uint burn = tokens.div(100); //1% burn
         uint send = tokens.sub(burn);
@@ -301,6 +302,8 @@ contract _HERTZ is ERC20Interface, Owned{
 
     function transferFrom(address from, address to, uint tokens) public returns(bool) {
         require (balances[from] >= tokens && allowed[from][msg.sender] >= tokens && tokens > 0);
+        require(address(to)!=address(0));
+        
         uint burn = tokens.div(100); //1% burn
         uint send = tokens.sub(burn);
         _transferFrom(from, to, send);
