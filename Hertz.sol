@@ -184,7 +184,7 @@ contract _HERTZ is ERC20Interface, Owned{
     
     // -------------------------------------------------------------------------
     // This view function shows how many tokens will be obtained for a given Wei
-    // The price is off by + or - 5 given the Solidity math limits
+    // The price is off by + or - 5 Wei given the Solidity math limits
     // -------------------------------------------------------------------------
     function priceToTokensCalculator(uint fee) public view returns(uint) {  
         if(fee<currentWeiPrice) return 0;
