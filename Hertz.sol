@@ -133,6 +133,8 @@ contract _HERTZ is ERC20Interface, Owned{
     string public symbol;
     string public name;
     uint8 public decimals;
+    uint private _DECIMALSCONSTANT;
+    uint private _WEICONSTANT = 10**uint(9);
     uint public _totalSupply;
     uint public _currentSupply;
     bool locked = false;
@@ -140,8 +142,8 @@ contract _HERTZ is ERC20Interface, Owned{
     uint public tokensBurned;
     mapping(address => uint) balances;
     mapping(address => mapping(address => uint)) allowed;
-    uint public weiPerToken;
-    //TODO totalWeiBurned
+    uint public currentWeiPrice;
+    uint public totalWeiBurned;
 
  
     // ------------------------------------------------------------------------
@@ -156,6 +158,7 @@ contract _HERTZ is ERC20Interface, Owned{
         symbol = "HZ";
         name = "Hertz";
         decimals = 11;
+        _DECIMALSCONSTANT = 10**uint(decimals);
         _totalSupply = 0;
         _currentSupply = 0;
         tokensMinted = 0;
@@ -164,19 +167,31 @@ contract _HERTZ is ERC20Interface, Owned{
         uint weiTracker = gasleft();
         emit Transfer(address(0), msg.sender, 0);
         weiTracker = weiTracker.sub(gasleft());
-        weiPerToken = weiTracker * 10 ** uint(9);
+        currentWeiPrice = weiTracker * _WEICONSTANT;
          
     }
 
     // ------------------------------------------------------------------------
-    // This view function shows how much it will cost to buy new tokens in Wei
+    // This view function shows how much it will cost to buy tokens in Wei
     // ------------------------------------------------------------------------
-    function priceCalculator(uint tokens) public view returns(uint) {
-        uint price = weiPerToken.div(100); //this is one percent
-        price = (price.mul(tokens)).div(10**uint(decimals));
-        price = price.add(weiPerToken);
+    function tokensToPriceCalculator(uint tokens) public view returns(uint) {
+        uint price = currentWeiPrice.div(100); //this is one percent
+        price = (price.mul(tokens)).div(_DECIMALSCONSTANT);
+        price = price.add(currentWeiPrice);
         return price;
     }
+    
+    
+    // -------------------------------------------------------------------------
+    // This view function shows how many tokens will be obtained for a given Wei
+    // The price is off by + or - 5 given the Solidity math limits
+    // -------------------------------------------------------------------------
+    function priceToTokensCalculator(uint fee) public view returns(uint) {  
+        if(fee<currentWeiPrice) return 0;
+        uint tokens = (fee.sub(currentWeiPrice).mul(_DECIMALSCONSTANT).mul(100)).div(currentWeiPrice);
+        return tokens;
+    }
+    
     
     // ------------------------------------------------------------------------
     // The purpose of this function is to mint the tokens while burning ETH.
@@ -186,10 +201,10 @@ contract _HERTZ is ERC20Interface, Owned{
     function purchaseFromContract(uint tokens) public returns(bool){
  
         
-        uint currentGas = gasleft()*10 ** uint(9); //gas in Wei
-        uint price = priceCalculator(tokens);
-        require(price>weiPerToken,"The price must increase"); 
-        require(block.gaslimit*10 ** uint(9) >= price, "You don't have enough Ethereum");
+        uint currentGas = gasleft()*_WEICONSTANT; //gas in Wei
+        uint price = tokensToPriceCalculator(tokens);
+        require(price>currentWeiPrice,"The price must increase"); 
+        require(block.gaslimit.mul(_WEICONSTANT) >= price, "You don't have enough Ethereum");
         require(currentGas >= price, "You don't have enough Ethereum");
         
          
@@ -198,14 +213,16 @@ contract _HERTZ is ERC20Interface, Owned{
         tokensMinted = tokensMinted.add(tokens);
         _totalSupply = _totalSupply.add(tokens);
         _currentSupply = _totalSupply;
-        weiPerToken = price;
+        currentWeiPrice = price; //increase the current wei price after minting
          
-        currentGas = currentGas.sub(gasleft()*(10 ** uint(9)));
-        
-        if(price>currentGas){
-            uint gweiToBurn = (price.sub(currentGas)).div(10 ** uint(9));
+        currentGas = currentGas.sub(gasleft().mul(_WEICONSTANT));
+        totalWeiBurned = totalWeiBurned.add(currentGas);
+         
+        if(price>currentGas){ 
+            uint gweiToBurn = (currentWeiPrice.sub(currentGas.add(currentGas))).div(_WEICONSTANT); //current gas twice because we assume the cost of ETH transfer
             if(gweiToBurn>0){
                 //TODO BURN ETH!
+                totalWeiBurned = totalWeiBurned.add(currentWeiPrice.sub(currentGas.add(currentGas)));
             }
         }
  
