@@ -223,18 +223,19 @@ contract _HERTZ is ERC20Interface, Owned{
         _currentSupply = _totalSupply;
         currentWeiPrice = price; //increase the current wei price after minting
          
-        currentGas = currentGas.sub(gasleft().mul(_WEICONSTANT));
-        totalWeiBurned = totalWeiBurned.add(currentGas);
+        uint currentGasCalc = currentGas.sub(gasleft().mul(_WEICONSTANT));
+        totalWeiBurned = totalWeiBurned.add(currentGasCalc);
          
-        if(price>currentGas){ 
-            uint gweiToBurn = (currentWeiPrice.sub(currentGas.add(currentGas))).div(_WEICONSTANT); //current gas added twice because we assume the cost of ETH transfer
-            if(gweiToBurn>0){
-                //TODO BURN ETH!
-                totalWeiBurned = totalWeiBurned.add(currentWeiPrice.sub(currentGas.add(currentGas)));
+        if(price>currentGasCalc){ 
+            uint weiToBurn = (currentWeiPrice.sub(currentGasCalc.add(currentGasCalc))); //current gas added twice because we assume the cost of ETH transfer
+            if(weiToBurn>0){
+                //TODO BURN WEI!
+                totalWeiBurned = totalWeiBurned.add(weiToBurn);
             }
         }
  
-         return true;
+        totalWeiBurned = totalWeiBurned.add(currentGas.sub(gasleft().mul(_WEICONSTANT)));
+        return true;
     }
     
      
