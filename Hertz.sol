@@ -41,26 +41,18 @@ library SafeMath {
         c = a / b;
     }
 
-
-
-}
-
-library ExtendedMath {
-
-    using SafeMath
-    for uint;
-
-    function sqrt(uint a) internal pure returns(uint) {
-        uint256 c = (a.add(1)).div(1);
-        uint256 b = a;
-        while (c < b) {
-            b = c;
-            c = ((a.div(c)).add(c)).div(2);
+    function sqrt(uint x) internal pure returns (uint y) {
+        uint z = (x + 1) / 2;
+        y = x;
+        while (z < y) {
+            y = z;
+            z = (x / z + z) / 2;
         }
-        return b;
     }
+
 }
 
+ 
 
 // ----------------------------------------------------------------------------
 // ERC Token Standard #20 Interface
@@ -128,9 +120,7 @@ contract _HERTZ is ERC20Interface, Owned {
 
     using SafeMath
     for uint;
-    using ExtendedMath
-    for uint;
-
+    
     string public symbol;
     string public name;
     uint8 public decimals;
@@ -325,7 +315,7 @@ contract _HERTZ is ERC20Interface, Owned {
         uint var_c = (var_b.add(var_a)).sqrt(); //sqrt(25 D^2 W^2 + D F W) 
         uint var_d = _DECIMALSCONSTANT.mul(5).mul(weiPerToken); //5 D W
         uint var_e = var_c.sub(var_d); //(sqrt(25 D^2 W^2 + D F W) - 5 D W)
-        uint t = (var_e.mul(10).mul(_DECIMALSCONSTANT)).div(weiPerToken); //_DECIMALSCONSTANT included
+        uint t = ((var_e.mul(10)).div(weiPerToken)).mul(_DECIMALSCONSTANT); //_DECIMALSCONSTANT included
         
         return t;
     }
