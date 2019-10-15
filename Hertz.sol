@@ -1,5 +1,23 @@
 pragma solidity >= 0.5 .0 < 0.7 .0;
 
+/*
+
+  -------                      -------  
+ |███████|                   .|███████| 
+ |███████|                   .|███████| 
+ |███████|                   .|███████| 
+ |███████|------             '|███████| 
+ |████████████|--          .|-████████| 
+ |██████████|--          .|-██████████| 
+ |████████|--          .|-████████████| 
+ |███████|            .|------|███████| 
+ |███████|                   .|███████| 
+ |███████|                   .|███████| 
+ |███████|       HERTZ       .|███████| 
+  -------                      ------- 
+
+*/
+
 
 // The purpose of this token is to create a deflationary token whose medium-moving-average price will always increase.
 // Since it is an ERC20 token, the price will always depend on a price of Ethereum. Otherwise, oracles must be used.
