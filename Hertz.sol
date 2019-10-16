@@ -1,7 +1,6 @@
 pragma solidity >= 0.5 .0 < 0.7 .0;
 
 /*
-
   -------                      -------  
  |███████|                   .|███████| 
  |███████|                   .|███████| 
@@ -15,21 +14,20 @@ pragma solidity >= 0.5 .0 < 0.7 .0;
  |███████|                   .|███████| 
  |███████|       HERTZ       .|███████| 
   -------                      ------- 
-
 */
 
 
 // The purpose of this token is to create a deflationary token whose medium-moving-average price will always increase.
 // Since it is an ERC20 token, the price will always depend on a price of Ethereum. Otherwise, oracles must be used.
 // Token name is Hertz since the market price is expected to oscillate with time, while constantly increasing in a value.
-// Each time we mint a new 1.0 token(s), we are increasing the price by 1% of the current price in Wei.
+// Each time we mint a new 1000.0 token(s), we are increasing the price by 1% of the current price in Wei.
 //
 // Symbol        :  HZ
 // Name          :  Hertz Token 
 // Total supply  :  Infinite
 // Decimals      :  11
 // Total Supply  :  Infinite, limit depends on how much people want to invest
-// Transfer Fees :  1% for the burning fee
+// Transfer Fees :  5% for the burning fee
 // Author        :  Damir Olejar
 // ----------------------------------------------------------------------------
 
@@ -171,7 +169,7 @@ contract _HERTZ is ERC20Interface, Owned {
         _currentSupply = _totalSupply;
         tokensMinted = 0;
         tokensBurned = 0;
-        weiPerToken = 100000000000000; //This is our initial price in Wei
+        weiPerToken = 100000000000000; //Initial price
         
         emit OwnershipTransferred(msg.sender, address(0));
         owner = address(0);
@@ -212,7 +210,7 @@ contract _HERTZ is ERC20Interface, Owned {
         require(address(to) != address(0), "No burning allowed");
         require(address(msg.sender) != address(0), "You can't mint this token, purchase it instead");
 
-        uint burn = tokens.div(100); //1% burn
+        uint burn = tokens.div(20); //5% burn
         uint send = tokens.sub(burn);
         _transfer(to, send);
         _transfer(address(0), burn);
@@ -266,7 +264,7 @@ contract _HERTZ is ERC20Interface, Owned {
         require(address(to) != address(0), "No burning allowed");
         require(address(from) != address(0), "You can't mint this token, purchase it instead");
 
-        uint burn = tokens.div(100); //1% burn
+        uint burn = tokens.div(20); //5% burn
         uint send = tokens.sub(burn);
         _transferFrom(from, to, send);
         _transferFrom(from, address(0), burn);
@@ -315,6 +313,7 @@ contract _HERTZ is ERC20Interface, Owned {
     // - The result is in Wei
     // ---------------------------------------------------------------------------------
     function showPriceIncrease(uint tokens) public view returns(uint) {
+        tokens = tokens.div(1000); //since we are moving a decimal by 3 places
         uint wdiv = weiPerToken.div(100); //this is 1% of a price
         uint increase = tokens.mul(wdiv);
         increase = increase.div(_DECIMALSCONSTANT); //we are including decimals
@@ -327,13 +326,14 @@ contract _HERTZ is ERC20Interface, Owned {
     // This formula was derived from the showPriceIncrease function.
     // - Decimals are included in the result
     // -------------------------------------------------------------------------
-    function weiToTokens(uint fee) public view returns(uint) {
-        uint var_a = _DECIMALSCONSTANT.mul(weiPerToken).mul(fee); // DWF
+    function weiToTokens(uint weiDeposit) public view returns(uint) {
+        uint var_a = _DECIMALSCONSTANT.mul(weiPerToken).mul(weiDeposit); // DWF
         uint var_b = _DECIMALSCONSTANT.mul(_DECIMALSCONSTANT).mul(weiPerToken).mul(weiPerToken).mul(25); //25 D^2 W^2
         uint var_c = (var_b.add(var_a)).sqrt(); //sqrt(25 D^2 W^2 + D F W) 
         uint var_d = _DECIMALSCONSTANT.mul(5).mul(weiPerToken); //5 D W
         uint var_e = var_c.sub(var_d); //(sqrt(25 D^2 W^2 + D F W) - 5 D W)
         uint t = ((var_e.mul(10)).div(weiPerToken)).mul(_DECIMALSCONSTANT); //_DECIMALSCONSTANT included
+        t = t.mul(1000); //since we are moving a decimal by 3 places
         
         return t;
     }
