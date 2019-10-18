@@ -1,33 +1,31 @@
 pragma solidity >= 0.5 .0 < 0.7 .0;
 
 /*
-  -------                      -------  
- |███████|                   .|███████| 
- |███████|                   .|███████| 
- |███████|                   .|███████| 
- |███████|------             '|███████| 
- |████████████|--          .|-████████| 
- |██████████|--          .|-██████████| 
- |████████|--          .|-████████████| 
- |███████|            .|------|███████| 
- |███████|                   .|███████| 
- |███████|                   .|███████| 
- |███████|       HERTZ       .|███████| 
-  -------                      ------- 
+  _    _ ____________ _______ _____
+ | |  |   ____   __  __   ______  /
+ | |__|  |__  | |__) | | |     / / 
+ |  __    __| |  _  /  | |    / /  
+ | |  |  |____| | \ \  | |   / /__ 
+ |_|  |_________|  \_\ |_|  /_____|
+ 
+ A stable coin, with a constantly increasing price.
 */
 
 
 // The purpose of this token is to create a deflationary token whose medium-moving-average price will always increase.
 // Since it is an ERC20 token, the price will always depend on a price of Ethereum. Otherwise, oracles must be used.
 // Token name is Hertz since the market price is expected to oscillate with time, while constantly increasing in a value.
-// Each time we mint a new 1000.0 token(s), we are increasing the price by 1% of the current price in Wei.
+// Tokens can be purchased from a contract and exchanged for Ethereum as well.
+// Since there is a 5% token burn per each transfer, the overall price will increase with it too.
+// We start with a 1ETH:1000HZ ratio, which will increase by the token burning with a transfer.
 //
 // Symbol        :  HZ
 // Name          :  Hertz Token 
 // Total supply  :  Infinite
-// Decimals      :  11
+// Decimals      :  18
 // Total Supply  :  Infinite, limit depends on how much people want to invest
-// Transfer Fees :  5% for the burning fee
+// Transfer Fees :  5% deducted from a transfer (a burning fee).
+// Exchange Fees :  NONE! Except the Ethereum gas used for a transfer.
 // Author        :  Damir Olejar
 // ----------------------------------------------------------------------------
 
@@ -56,7 +54,8 @@ library SafeMath {
         require(b > 0);
         c = a / b;
     }
-
+ 
+    
     function sqrt(uint x) internal pure returns (uint y) {
         uint z = (x + 1) / 2;
         y = x;
@@ -88,6 +87,8 @@ contract ERC20Interface {
     function approve(address spender, uint tokens) public returns(bool success);
 
     function transferFrom(address from, address to, uint tokens) public returns(bool success);
+    
+    function burnTokens(uint tokens) public returns(bool success);
 
     function purchaseTokens() external payable;
 
@@ -98,8 +99,6 @@ contract ERC20Interface {
 
 // ----------------------------------------------------------------------------
 // Contract function to receive approval and execute function in one call
-//
-// Borrowed from MiniMeToken
 // ----------------------------------------------------------------------------
 
 contract ApproveAndCallFallBack {
@@ -113,7 +112,6 @@ contract ApproveAndCallFallBack {
 contract Owned {
 
     address public owner;
-    address public newOwner;
 
     event OwnershipTransferred(address indexed _from, address indexed _to);
 
@@ -128,8 +126,7 @@ contract Owned {
 }
 
 // ----------------------------------------------------------------------------
-// ERC20 Token, with the addition of symbol, name and decimals and an
-// initial fixed supply
+// ERC20 Token
 // ----------------------------------------------------------------------------
 
 contract _HERTZ is ERC20Interface, Owned {
@@ -148,8 +145,7 @@ contract _HERTZ is ERC20Interface, Owned {
     uint public tokensBurned;
     mapping(address => uint) balances;
     mapping(address => mapping(address => uint)) allowed;
-    uint public weiPerToken;
-    uint public totalWeiBurned;
+    uint public weiDeposited;
 
 
     // ------------------------------------------------------------------------
@@ -163,17 +159,15 @@ contract _HERTZ is ERC20Interface, Owned {
 
         symbol = "HZ";
         name = "Hertz";
-        decimals = 11;
+        decimals = 18;
         _DECIMALSCONSTANT = 10 ** uint(decimals);
         _totalSupply = 0;
         _currentSupply = _totalSupply;
         tokensMinted = 0;
         tokensBurned = 0;
-        weiPerToken = 100000000000000; //Initial price
-        
+
         emit OwnershipTransferred(msg.sender, address(0));
         owner = address(0);
-        newOwner = address(0);
     }
 
     // ------------------------------------------------------------------------
@@ -308,57 +302,76 @@ contract _HERTZ is ERC20Interface, Owned {
         return true;
     }
 
-    // ---------------------------------------------------------------------------------
-    // This view function shows how the price will increase after the purchase of tokens
-    // - The result is in Wei
-    // ---------------------------------------------------------------------------------
-    function showPriceIncrease(uint tokens) public view returns(uint) {
-        tokens = tokens.div(1000); //since we are moving a decimal by 3 places
-        uint wdiv = weiPerToken.div(100); //this is 1% of a price
-        uint increase = tokens.mul(wdiv);
-        increase = increase.div(_DECIMALSCONSTANT); //we are including decimals
-        increase = weiPerToken.add(increase);
-        return increase;
-    }
-
     // -------------------------------------------------------------------------
     // This view function shows how many tokens will be obtained for your Wei.
     // This formula was derived from the showPriceIncrease function.
     // - Decimals are included in the result
     // -------------------------------------------------------------------------
-    function weiToTokens(uint weiDeposit) public view returns(uint) {
-        uint var_a = _DECIMALSCONSTANT.mul(weiPerToken).mul(weiDeposit); // DWF
-        uint var_b = _DECIMALSCONSTANT.mul(_DECIMALSCONSTANT).mul(weiPerToken).mul(weiPerToken).mul(25); //25 D^2 W^2
-        uint var_c = (var_b.add(var_a)).sqrt(); //sqrt(25 D^2 W^2 + D F W) 
-        uint var_d = _DECIMALSCONSTANT.mul(5).mul(weiPerToken); //5 D W
-        uint var_e = var_c.sub(var_d); //(sqrt(25 D^2 W^2 + D F W) - 5 D W)
-        uint t = ((var_e.mul(10)).div(weiPerToken)).mul(_DECIMALSCONSTANT); //_DECIMALSCONSTANT included
-        t = t.mul(1000); //since we are moving a decimal by 3 places
+    function howManyTokens(uint weiPurchase) public view returns(uint) {
         
-        return t;
+        if(_currentSupply==0 && weiDeposited==0 ) return weiPurchase; //initial step
+        
+        if(weiDeposited==0) return 0;
+        if(_currentSupply==0) return 0;
+        if(weiPurchase==0) return 0;
+        
+        uint ret = (weiPurchase.mul(_currentSupply)).div(weiDeposited);
+        return ret;
+    }
+    
+    function howManyWei(uint tokens) public view returns(uint){
+        if(tokens==0) return 0;
+        if(weiDeposited==0) return 0;
+        if(_currentSupply==0) return 0;
+
+        uint ret = (weiDeposited.mul(tokens)).div(_currentSupply);
+        return ret;
     }
 
     // ------------------------------------------------------------------------
     // This is the function which allows us to purchase tokens from a contract
-    // - Nobody collects Ethereum, it is burned instead
+    // - Nobody collects Ethereum, it stays in a contract for exchange
     // ------------------------------------------------------------------------
     function purchaseTokens() external payable {
-        uint tokens = weiToTokens(msg.value);
-        require(tokens > 0, "You will get zero tokens with this purchase");
+        
+        uint tokens = howManyTokens(msg.value);
 
-        uint increase = showPriceIncrease(tokens);
-        require(increase > weiPerToken, "The purchase must increase the token price");
-        weiPerToken = increase;
-
+        //mint new tokens
         emit Transfer(address(0), msg.sender, tokens);
+        
         balances[msg.sender] = balances[msg.sender].add(tokens);
         tokensMinted = tokensMinted.add(tokens);
         _totalSupply = _totalSupply.add(tokens);
         _currentSupply = _totalSupply;
-
-        totalWeiBurned = totalWeiBurned.add(msg.value);
-        address(0).transfer(msg.value);
+        
+        weiDeposited = weiDeposited.add(msg.value);
     }
+    
+    function purchaseEth(uint tokens) external {
+        uint getWei = howManyWei(tokens);
+        
+        //burn tokens to get wei
+        emit Transfer(msg.sender, address(0), tokens);
+        balances[msg.sender] = balances[msg.sender].sub(tokens);
+        _totalSupply = _totalSupply.sub(tokens);
+        _currentSupply = _totalSupply;
+        
+        address(msg.sender).transfer(getWei);
+        weiDeposited = weiDeposited.sub(getWei);
+    }
+    
+    
+    
+    function burnTokens(uint tokens) public returns(bool success) {
+        balances[msg.sender] = balances[msg.sender].sub(tokens);
+        _totalSupply = _totalSupply.sub(tokens);
+        _currentSupply = _totalSupply;
+        tokensBurned = tokensBurned.add(tokens);
+        emit Transfer(msg.sender, address(0), tokens);
+        return true;
+    }    
+
+
 
     // ------------------------------------------------------------------------
     // Owner can transfer out any accidentally sent ERC20 tokens
