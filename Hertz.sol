@@ -1,7 +1,7 @@
 pragma solidity >= 0.5 .0 < 0.7 .0;
 
 /*
-  _    _ ____________ _______ _____
+  _    ____________________________
  | |  |   ____   __  __   ______  /
  | |__|  |__  | |__) | | |     / / 
  |  __    __| |  _  /  | |    / /  
@@ -77,20 +77,14 @@ library SafeMath {
 contract ERC20Interface {
 
     function totalSupply() public view returns(uint);
-
     function balanceOf(address tokenOwner) public view returns(uint balance);
-
     function allowance(address tokenOwner, address spender) public view returns(uint remaining);
-
     function transfer(address to, uint tokens) public returns(bool success);
-
     function approve(address spender, uint tokens) public returns(bool success);
-
     function transferFrom(address from, address to, uint tokens) public returns(bool success);
-    
     function burnTokens(uint tokens) public returns(bool success);
-
     function purchaseTokens() external payable;
+    function purchaseEth(uint tokens) external ;
 
     event Transfer(address indexed from, address indexed to, uint tokens);
     event Approval(address indexed tokenOwner, address indexed spender, uint tokens);
@@ -110,8 +104,8 @@ contract ApproveAndCallFallBack {
 // ----------------------------------------------------------------------------
 
 contract Owned {
-
     address public owner;
+    address public newOwner;
 
     event OwnershipTransferred(address indexed _from, address indexed _to);
 
@@ -123,6 +117,18 @@ contract Owned {
         require(msg.sender == owner);
         _;
     }
+
+    function transferOwnership(address _newOwner) public onlyOwner {
+        newOwner = _newOwner;
+    }
+
+    function acceptOwnership() public {
+        require(msg.sender == newOwner);
+        emit OwnershipTransferred(owner, newOwner);
+        owner = newOwner;
+        newOwner = address(0);
+    }
+
 }
 
 // ----------------------------------------------------------------------------
@@ -165,9 +171,11 @@ contract _HERTZ is ERC20Interface, Owned {
         _currentSupply = _totalSupply;
         tokensMinted = 0;
         tokensBurned = 0;
-
+        
+        //We will transfer the ownership only once, making 100% sure there is no owner.
         emit OwnershipTransferred(msg.sender, address(0));
         owner = address(0);
+        newOwner = address(0);
     }
 
     // ------------------------------------------------------------------------
