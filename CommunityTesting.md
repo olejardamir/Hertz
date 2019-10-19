@@ -35,3 +35,11 @@ https://ropsten.etherscan.io/address/0x723b09eba9267d0e4415659ade75e6436384f693#
 
 
 Please report any findings here, on telegram or on twitter.
+
+Telegram: https://t.me/joinchat/Ote9nhdJeWXwXRW1st2JIg
+
+Twitter: https://twitter.com/0xbutt
+
+
+
+Note: No, this project is not associated with 0xBUTT in any way, except that the lead developer (myself) is taking it as a solo project.
