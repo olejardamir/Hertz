@@ -23,7 +23,7 @@ Then, try testing any of these functions
 
 1. purchaseTokens – You must enter the amount in Ethereum (decimals allowed) that you are willing to spend.
 
-2. purchaseEth – Once you have enough tokens, you may want to convert them back to Ethereum.
+2. purchaseEth – Once you have enough tokens, you may want to convert them back to Ethereum. NOTE: there are 18 decimals and you must include the decimals (without a point or a comma).
 
 3. transfer – Transfer some tokens to any account, to see how the burning works and to see how much Ethereum you will be getting after that.
 
