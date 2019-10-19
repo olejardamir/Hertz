@@ -1,38 +1,31 @@
 pragma solidity >= 0.5 .0 < 0.7 .0;
 
 /*
-HZHZHZHZHZHZHZHZHZy..yHZHZHZHZHZHZHZHZHZ
-HZHZHZHZHZHZHZHZm:    :mHZHZHZHZHZHZHZHZ
-HZHZHZHZHZHZHZNo`      `sHZHZHZHZHZHZHZN
-HZHZHZHZHZHZNd-          -dHZHZHZHZHZHZN
-HZHZHZHZHZHZ+              +HZHZHZHZHZHZ
-HZHZHZHZHZNdhyyyyyyyo-      .yHZHZHZHZHZ
-HZHZHZHZHZHZHZHZHZHZHZs`      :mHZHZHZHZ
-HZHZHZHZHZHZHZHZHZHZHZNm/      `sHZHZHZN
-HZHZHZHZHZHZHZHZHZHZHZHZNh.      -dHZHZN
-HZHZdddddmmmHZHZHZHZHZHZHZNo       +HZHZ
-HZy`        .sHZHZHZm+++++++.       .yHZ
-m:            -dHZHZNy.               :m
-`               +HZHZHZ+               `
-m:               .hHZHZNd-            :m
-HZy`       .+++++++HZHZHZNs.        `yHZ
-HZHZ+       +HZHZHZHZHZHZHZNmmmmddddHZHZ
-HZHZNd-      .hHZHZHZHZHZHZHZHZHZHZHZHZN
-HZHZHZNs`      /mHZHZHZHZHZHZHZHZHZHZHZN
-HZHZHZHZm:      `sHZHZHZHZHZHZHZHZHZHZHZ
-HZHZHZHZHZy.      -oyyyyyyyydHZHZHZHZHZN
-HZHZHZHZHZHZ+              +HZHZHZHZHZHZ
-HZHZHZHZHZHZNd-          -dHZHZHZHZHZHZN
-HZHZHZHZHZHZHZNs`      `sHZHZHZHZHZHZHZN
-HZHZHZHZHZHZHZHZm:    :mHZHZHZHZHZHZHZHZ
-HZHZHZHZHZHZHZHZHZy..yHZHZHZHZHZHZHZHZHZ
+HZHZHZHZHZHZNh..hHZHZHZHZHZHZN
+HZHZHZHZHZNm:    :mHZHZHZHZHZN
+HZHZHZHZHZo`      `oHZHZHZHZHZ
+HZHZHZHZm/-....`    .yHZHZHZHZ
+HZHZHZHZHZHZHZHZs.    /dHZHZHZ
+HZHZHZHZHZHZHZHZNm+`   `omHZHZ
+HZNmmmmmHZHZHZHZHZNh:    -yHZN
+Nd/.....-/dHZHZmooooo`     /dN
+o`        `+mHZNs.          `o
+o`          .sHZNm+`        `o
+Nd/     `ooooomHZHZh/-...../dN
+HZNy-    -hHZHZHZHZHZNmmmmmHZN
+HZHZmo`   `+mHZHZHZHZHZHZHZHZN
+HZHZHZd/    .sHZHZHZHZHZHZHZHZ
+HZHZHZHZy.    `....-/mHZHZHZHZ
+HZHZHZHZHZo`      `oHZHZHZHZHZ
+HZHZHZHZHZNm:    :mHZHZHZHZHZN
+HZHZHZHZHZHZNh..hHZHZHZHZHZHZN
 
-     _    ____________________________
-    | |  |   ____   __  __   ______  /
-    | |__|  |__  | |__) | | |     / / 
-    |  __    __| |  _  /  | |    / /  
-    | |  |  |____| | \ \  | |   / /__ 
-    |_|  |_________|  \_\ |_|  /_____| V1.0
+ _    ____________________________
+| |  |   ____   __  __   ______  /
+| |__|  |__  | |__) | | |     / / 
+|  __    __| |  _  /  | |    / /  
+| |  |  |____| | \ \  | |   / /__ 
+|_|  |_________|  \_\ |_|  /_____| V1.0
      
 A stable-coin, with a constantly increasing price.
 */
