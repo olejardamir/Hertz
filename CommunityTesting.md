@@ -3,7 +3,7 @@ Note: No, this project is not associated with ButtCoin (0xBUTT) in any way, exce
 
 
 ## TODO FIXES
-- none at the moment
+- Add burning fees to exchange, so people can't transfer without burning
 
 If any issues are detected, they will be fixed and links updated on this page and announced to Telegram: https://t.me/joinchat/Ote9nhcPmwqf4Kmh3Fh6Uw
 
