@@ -28,15 +28,7 @@ pragma solidity >= 0.5 .0 < 0.7 .0;
      |_|  |_________|  \_\ |_|  /_____|
      
 A stable-coin, with a constantly increasing price.
- 
 */
-
-//
-// The purpose of this token is to create a deflationary token with an ever-increasing price.
-// Since it is an ERC20 token, the price will always depend on a price of Ethereum. Otherwise, oracles must be used.
-// Token's name is Hertz since the market price is expected to oscillate with time, while constantly increasing in a value.
-// Tokens can be purchased from a contract and exchanged for Ethereum within a contract as well.
-//
 // Symbol        :  HZ
 // Name          :  Hertz Token 
 // Total supply  :  Infinite
@@ -49,7 +41,7 @@ A stable-coin, with a constantly increasing price.
 // Legal Disclaimer: Author is not responsible for anyone's use of this token. 
 // Furthermore, author is not obligated to any activities, other than his own, that may be (or are) associated with this token.
 // This token has no owner, and therefore, use it strictly at your own discretion.
-// Author's name has been provided as a gesture of a good will, in hope that this disclaimer will remain only as a notification.
+// Author's name has been provided as a gesture of a good will, in hope that this disclaimer will remain only as a note.
 // Written on Friday, October 18th 2019. - Toronto / Ontario, Canada.
 // -----------------------------------------------------------------------------------------------------------------------------------------
 
