@@ -21,13 +21,13 @@ Select “Connect to Web3” and press “OK” if prompted.
 
 Then, try testing any of these functions
 
-1. purchaseTokens – You must enter the amount in Ethereum (decimals allowed) that you are willing to spend.
+1. purchaseTokens – You must enter the amount in Ethereum (decimals allowed) that you are willing to spend. The result will be in Wei. A good calculator is: http://eth-converter.com/
 
 2. purchaseEth – Once you have enough tokens, you may want to convert them back to Ethereum. NOTE: there are 18 decimals and you must include the decimals (without a point or a comma).
 
-3. transfer – Transfer some tokens to any account, to see how the burning works and to see how much Ethereum you will be getting after that.
+3. transfer – Transfer some tokens to any account, to see how the burning works and to see how much Ethereum you will be getting after that. You must include 18 decimals, without a point or a comma.
 
-4. burn – you may want to burn some of your tokens, to see how much Ethereum you will be getting after that.
+4. burn – you may want to burn some of your tokens, to see how much Ethereum you will be getting after that. You must include 18 decimals, without a point or a comma.
 
 
 Try to stress-test the system as much as possible. Imagine that you are a hacker who wants to break the code and get as much Ethereum from the contract as possible.  You may also want to check the numbers with the view functions with their queries:
