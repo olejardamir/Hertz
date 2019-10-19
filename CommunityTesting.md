@@ -1,5 +1,8 @@
 Note: No, this project is not associated with ButtCoin (0xBUTT) in any way, except that the lead developer (myself) is taking it as a separate solo project. In order to see it working without a flaw, usability must be tested before the main launch.
 
+If any issues are detected, they will be fixed and links updated on this page and announced to Telegram: https://t.me/joinchat/Ote9nhcPmwqf4Kmh3Fh6Uw
+
+
 The purpose of this document is a tutorial to how to test the Hertz token, and also to provide the instructions on how to obtain and trade the token once it launches.
 
 To inspect the source-code, go to:
@@ -38,7 +41,7 @@ https://ropsten.etherscan.io/address/0x723b09eba9267d0e4415659ade75e6436384f693#
 
 Please report any findings here, on telegram or on twitter.
 
-Telegram: https://t.me/joinchat/Ote9nhdJeWXwXRW1st2JIg
+Telegram: https://t.me/joinchat/Ote9nhcPmwqf4Kmh3Fh6Uw
 
 Twitter: https://twitter.com/0xbutt
 
