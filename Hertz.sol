@@ -1,44 +1,50 @@
 pragma solidity >= 0.5 .0 < 0.7 .0;
 
 /*
-mmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
-mmm+......................:mmm
-mmm-                      .mmm
-mmm-    -++++++++/        :mmm
-mmm-  :hmmmmmmmd/       :ymmmm
-mmm:/hmmmmmmmm/`     `:hmmmmmm
-mmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
-mmmmmmmmmdddddddmmmmmmmmmmdmmm
-mmmmmmh:       /dmmmmmmmh/.mmm
-mmmmy:       /dmmmmmmmh:  .mmm
-mmm/        :////////-    .mmm
-mmm-                      .mmm
-mmmo----------------------/mmm
-mmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
+HZHZHZHZHZHZHZHZHZy..yHZHZHZHZHZHZHZHZHZ
+HZHZHZHZHZHZHZHZm:    :mHZHZHZHZHZHZHZHZ
+HZHZHZHZHZHZHZNo`      `sHZHZHZHZHZHZHZN
+HZHZHZHZHZHZNd-          -dHZHZHZHZHZHZN
+HZHZHZHZHZHZ+              +HZHZHZHZHZHZ
+HZHZHZHZHZNdhyyyyyyyo-      .yHZHZHZHZHZ
+HZHZHZHZHZHZHZHZHZHZHZs`      :mHZHZHZHZ
+HZHZHZHZHZHZHZHZHZHZHZNm/      `sHZHZHZN
+HZHZHZHZHZHZHZHZHZHZHZHZNh.      -dHZHZN
+HZHZdddddmmmHZHZHZHZHZHZHZNo       +HZHZ
+HZy`        .sHZHZHZm+++++++.       .yHZ
+m:            -dHZHZNy.               :m
+`               +HZHZHZ+               `
+m:               .hHZHZNd-            :m
+HZy`       .+++++++HZHZHZNs.        `yHZ
+HZHZ+       +HZHZHZHZHZHZHZNmmmmddddHZHZ
+HZHZNd-      .hHZHZHZHZHZHZHZHZHZHZHZHZN
+HZHZHZNs`      /mHZHZHZHZHZHZHZHZHZHZHZN
+HZHZHZHZm:      `sHZHZHZHZHZHZHZHZHZHZHZ
+HZHZHZHZHZy.      -oyyyyyyyydHZHZHZHZHZN
+HZHZHZHZHZHZ+              +HZHZHZHZHZHZ
+HZHZHZHZHZHZNd-          -dHZHZHZHZHZHZN
+HZHZHZHZHZHZHZNs`      `sHZHZHZHZHZHZHZN
+HZHZHZHZHZHZHZHZm:    :mHZHZHZHZHZHZHZHZ
+HZHZHZHZHZHZHZHZHZy..yHZHZHZHZHZHZHZHZHZ
 
- _    ____________________________
-| |  |   ____   __  __   ______  /
-| |__|  |__  | |__) | | |     / / 
-|  __    __| |  _  /  | |    / /  
-| |  |  |____| | \ \  | |   / /__ 
-|_|  |_________|  \_\ |_|  /_____| V1.0
+     _    ____________________________
+    | |  |   ____   __  __   ______  /
+    | |__|  |__  | |__) | | |     / / 
+    |  __    __| |  _  /  | |    / /  
+    | |  |  |____| | \ \  | |   / /__ 
+    |_|  |_________|  \_\ |_|  /_____| V1.0
      
 A stable-coin, with a constantly increasing price.
 */
 // Symbol        :  HZ
 // Name          :  Hertz Token 
-// Total supply  :  21,000.0 (21 Thousand)
+// Total supply  :  21,000.0 (or 21 thousand tokens)
 // Decimals      :  18
 // Total Supply  :  Infinite, limit depends on how much people want to invest
 // Transfer Fees :  2% deducted from a transfer (a burning fee).
 // Exchange Fees :  2% of tokens deducted per exchange.
 // Author        :  Damir Olejar
 //
-// Legal Disclaimer: Author is not responsible for anyone's use of this token. 
-// Furthermore, author is not obligated to any activities, other than his own, that may be (or are) associated with this token.
-// This token has no owner, and therefore, use it strictly at your own discretion.
-// Author's name has been provided as a gesture of a good will, in hope that this disclaimer will remain only as a note.
-// Written on Friday, October 18th 2019. - Toronto / Ontario, Canada.
 // -----------------------------------------------------------------------------------------------------------------------------------------
 
 // ----------------------------------------------------------------------------
@@ -93,7 +99,7 @@ contract ERC20Interface {
     function transfer(address to, uint tokens) public returns(bool success);
     function approve(address spender, uint tokens) public returns(bool success);
     function transferFrom(address from, address to, uint tokens) public returns(bool success);
-    function burnTokens(uint tokens) public returns(bool success);
+    // function burnTokens(uint tokens) public returns(bool success); // for testing purposes only !
     function purchaseTokens() external payable;
     function purchaseEth(uint tokens) external ;
 
@@ -333,19 +339,19 @@ contract _HERTZ is ERC20Interface, Owned {
         if(weiPurchase==0) return 0;
         
         uint ret = (weiPurchase.mul(_currentSupply)).div(weiDeposited);
+        ret = ret.sub(ret.div(50)); //2% fee
         return ret;
     }
     
 // ----------------------------------------------------------------------------
 // This view function shows how much Wei will be obtained for your tokens.
 // - You must include decimals for an input.
-// - There is a 2% fee for purchasing Ethereum
+// - There is no fee for converting to Ethereum
 // ----------------------------------------------------------------------------
     function tokensToWei(uint tokens) public view returns(uint){
         if(tokens==0) return 0;
         if(weiDeposited==0) return 0;
         if(_currentSupply==0) return 0;
-        tokens = tokens.sub(tokens.div(50)); //2% fee
         uint ret = (weiDeposited.mul(tokens)).div(_currentSupply);
         return ret;
     }
@@ -353,6 +359,7 @@ contract _HERTZ is ERC20Interface, Owned {
 // ------------------------------------------------------------------------
 // This is the function which allows us to purchase tokens from a contract
 // - Nobody collects Ethereum, it stays in a contract
+// - There is a 2% fee for purchasing Tokens
 // ------------------------------------------------------------------------
     function purchaseTokens() external payable {
         
@@ -386,3 +393,9 @@ contract _HERTZ is ERC20Interface, Owned {
         weiDeposited = weiDeposited.sub(getWei);
     }
 }
+
+// Legal Disclaimer: Author is not responsible for anyone using of this token. 
+// Furthermore, author is not obligated to any activities that may be (or are) associated with this token.
+// This token has no owner, and therefore, use it strictly at your own discretion.
+// Author's name has been provided as a gesture of a good will, in hope that this disclaimer will remain only as a note.
+// Written on Friday, October 18th 2019. - Toronto / Ontario, Canada.
