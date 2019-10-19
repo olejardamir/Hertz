@@ -7,7 +7,7 @@ Note: No, this project is not associated with ButtCoin (0xBUTT) in any way, exce
 
 
 ## TODO FIXES
-- Rotate the ASCII logo in a contract, move the legal notice to a bottom of a contract
+- Rotate ASCII logo
 
 If any issues are detected, they will be fixed and links updated on this page and announced to Telegram: https://t.me/joinchat/Ote9nhcPmwqf4Kmh3Fh6Uw
 
@@ -17,7 +17,7 @@ If you have any questions about the steps below, please ask on Telegram: https:/
 The purpose of this document is a tutorial to how to test the Hertz token, and also to provide the instructions on how to obtain and trade the token once it launches.
 
 To inspect the source-code, go to:
-https://ropsten.etherscan.io/address/0xc0f3c272ea4cf1bc0dc1a76a315758e0f049c310#code
+https://ropsten.etherscan.io/address/0xF1060C7F14115f35C01569424b2549AFB4eC4c2D#code
 
 Before you start, you will need Metamask installed in a browser:
 https://metamask.io/
@@ -31,7 +31,7 @@ https://blog.bankex.org/how-to-buy-ethereum-using-metamask-ccea0703daec
 
 
 There are only a few functions that you may want to test. Go to:
-https://ropsten.etherscan.io/address/0xc0f3c272ea4cf1bc0dc1a76a315758e0f049c310#writeContract
+https://ropsten.etherscan.io/address/0xF1060C7F14115f35C01569424b2549AFB4eC4c2D#writeContract
 
 Select “Connect to Web3” and press “OK” if prompted.
 
@@ -47,7 +47,7 @@ Then, try testing any of these functions
 
 
 Try to stress-test the system as much as possible. Imagine that you are a hacker who wants to break the code and get as much Ethereum from the contract as possible.  You may also want to check the numbers with the view functions with their queries:
-https://ropsten.etherscan.io/address/0xc0f3c272ea4cf1bc0dc1a76a315758e0f049c310#readContract
+https://ropsten.etherscan.io/address/0xF1060C7F14115f35C01569424b2549AFB4eC4c2D#readContract
 
 
 Please report any findings here, on telegram or on twitter.
