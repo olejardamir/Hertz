@@ -1,3 +1,5 @@
+Note: No, this project is not associated with ButtCoin (0xBUTT) in any way, except that the lead developer (myself) is taking it as a solo project.
+
 The purpose of this document is a tutorial to how to test the Hertz token, and also to provide the instructions on how to obtain and trade the token once it launches.
 
 To inspect the source-code, go to:
@@ -40,6 +42,4 @@ Telegram: https://t.me/joinchat/Ote9nhdJeWXwXRW1st2JIg
 
 Twitter: https://twitter.com/0xbutt
 
-
-
-Note: No, this project is not associated with 0xBUTT in any way, except that the lead developer (myself) is taking it as a solo project.
+ 
