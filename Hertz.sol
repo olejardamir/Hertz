@@ -330,7 +330,6 @@ contract _HERTZ is ERC20Interface, Owned {
 // -------------------------------------------------------------------------
     function weiToTokens(uint weiPurchase) public view returns(uint) {
         if(_currentSupply==0 && weiDeposited==0 ) return weiPurchase; //initial step
-        
         if(weiDeposited==0) return 0;
         if(_currentSupply==0) return 0;
         if(weiPurchase==0) return 0;
@@ -359,9 +358,11 @@ contract _HERTZ is ERC20Interface, Owned {
 // - There is a 2% fee for purchasing Tokens
 // ------------------------------------------------------------------------
     function purchaseTokens() external payable {
+        require(msg.value>0);
         
         uint tokens = weiToTokens(msg.value);
         require(_currentSupply.add(tokens)<=_totalSupply,"We have reached our contract limit");
+        require(tokens>0);
 
         //mint new tokens
         emit Transfer(address(0), msg.sender, tokens);
@@ -379,7 +380,10 @@ contract _HERTZ is ERC20Interface, Owned {
 // - Burns deposited tokens, returns Ethereum.
 // ------------------------------------------------------------------------ 
     function purchaseEth(uint tokens) public {
+        require(tokens>0);
+        
         uint getWei = tokensToWei(tokens);
+        require(getWei>0);
         
         //burn tokens to get wei
         emit Transfer(msg.sender, address(0), tokens);
