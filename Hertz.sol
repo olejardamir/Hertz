@@ -337,14 +337,16 @@ contract _HERTZ is ERC20Interface, Owned {
         if(weiPurchase==0) return 0;
         
         uint ret = (weiPurchase.mul(_currentSupply)).div(weiDeposited);
+        ret = ret.mul(10000);
         return ret;
     }
     
 // ----------------------------------------------------------------------------
 // This view function shows how much Wei will be obtained for your tokens.
-// - Decimals are included in result, you must include decimals for an input.
+// - You must include decimals for an input.
 // ----------------------------------------------------------------------------
     function tokensToWei(uint tokens) public view returns(uint){
+        tokens = tokens.div(10000);
         if(tokens==0) return 0;
         if(weiDeposited==0) return 0;
         if(_currentSupply==0) return 0;
