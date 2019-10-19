@@ -6,7 +6,7 @@ Note: No, this project is not associated with ButtCoin (0xBUTT) in any way, exce
 - The amount is way off, do a 1:1 with ether
 - Make total supply finite
 - Make a minting limit, also reduce from minted when exchanged to ETH
-
+- Do a 2% burn
 
 
 If any issues are detected, they will be fixed and links updated on this page and announced to Telegram: https://t.me/joinchat/Ote9nhcPmwqf4Kmh3Fh6Uw
