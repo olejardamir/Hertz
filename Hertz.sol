@@ -31,19 +31,18 @@ HZHZHZHZHZHZHZNm/ /mHZHZHZHZHZHZHZN
 | |  |  |____| | \ \  | |   / /__ 
 |_|  |_________|  \_\ |_|  /_____| V1.0
      
-A stable-coin, with a constantly increasing market price, and an integrated micro-exchange.
-
- Symbol        :  HZ
- Name          :  Hertz Token 
- Total supply  :  21,000.0 (or 21 thousand tokens)
- Decimals      :  18
- Total Supply  :  Infinite, limit depends on how much people want to invest
- Transfer Fees :  2% deducted from a transfer (a burning fee).
- Exchange Fees :  2% of tokens deducted per exchange.
- Author        :  Damir Olejar
-
+A stable-coin, with a constantly increasing price.
 */
- 
+// Symbol        :  HZ
+// Name          :  Hertz Token 
+// Total supply  :  21,000.0 (or 21 thousand tokens)
+// Decimals      :  18
+// Total Supply  :  Infinite, limit depends on how much people want to invest
+// Transfer Fees :  2% deducted from a transfer (a burning fee).
+// Exchange Fees :  2% of tokens deducted per exchange.
+// Author        :  Damir Olejar
+//
+// -----------------------------------------------------------------------------------------------------------------------------------------
 
 // ----------------------------------------------------------------------------
 // Safe maths
@@ -379,7 +378,7 @@ contract _HERTZ is ERC20Interface, Owned {
 // This is the function which allows us to exchange tokens back to Ethereum
 // - Burns deposited tokens, returns Ethereum.
 // ------------------------------------------------------------------------ 
-    function purchaseEth(uint tokens) external {
+    function purchaseEth(uint tokens) public {
         uint getWei = tokensToWei(tokens);
         
         //burn tokens to get wei
@@ -390,6 +389,16 @@ contract _HERTZ is ERC20Interface, Owned {
         address(msg.sender).transfer(getWei);
         weiDeposited = weiDeposited.sub(getWei);
     }
+    
+// ------------------------------------------------------------------------
+// This is the function which allows us to exchange all tokens back to Ethereum
+// - Burns deposited tokens, returns Ethereum.
+// ------------------------------------------------------------------------ 
+    function sellAllTokens() external {
+        purchaseEth(balances[msg.sender]);
+    }   
+    
+    
 }
 
 // Legal Disclaimer: Author is not responsible for anyone using of this token. 
