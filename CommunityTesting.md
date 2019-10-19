@@ -1,5 +1,14 @@
 Note: No, this project is not associated with ButtCoin (0xBUTT) in any way, except that the lead developer (myself) is taking it as a separate solo project. In order to see it working without a flaw, usability must be tested before the main launch.
 
+
+
+## TODO FIXES
+- The amount is way off, do a 1:1 with ether
+- Make total supply finite
+- Make a minting limit, also reduce from minted when exchanged to ETH
+
+
+
 If any issues are detected, they will be fixed and links updated on this page and announced to Telegram: https://t.me/joinchat/Ote9nhcPmwqf4Kmh3Fh6Uw
 
 If you have any questions about the steps below, please ask on Telegram: https://t.me/joinchat/Ote9nhcPmwqf4Kmh3Fh6Uw
