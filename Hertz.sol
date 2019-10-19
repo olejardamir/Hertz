@@ -27,11 +27,11 @@ A stable-coin, with a constantly increasing price.
 */
 // Symbol        :  HZ
 // Name          :  Hertz Token 
-// Total supply  :  Infinite
+// Total supply  :  21,000.0 (21 Thousand)
 // Decimals      :  18
 // Total Supply  :  Infinite, limit depends on how much people want to invest
-// Transfer Fees :  5% deducted from a transfer (a burning fee).
-// Exchange Fees :  NONE! Except the Ethereum gas used for a transfer.
+// Transfer Fees :  2% deducted from a transfer (a burning fee).
+// Exchange Fees :  2% of tokens deducted per exchange.
 // Author        :  Damir Olejar
 //
 // Legal Disclaimer: Author is not responsible for anyone's use of this token. 
@@ -167,8 +167,8 @@ contract _HERTZ is ERC20Interface, Owned {
         name = "Hertz";
         decimals = 18;
         _DECIMALSCONSTANT = 10 ** uint(decimals);
-        _totalSupply = 0;
-        _currentSupply = _totalSupply;
+        _totalSupply = (uint(21000)).mul(_DECIMALSCONSTANT);
+        _currentSupply = 0;
         tokensMinted = 0;
         tokensBurned = 0;
         
@@ -211,7 +211,7 @@ contract _HERTZ is ERC20Interface, Owned {
         require(address(to) != address(0), "No burning allowed");
         require(address(msg.sender) != address(0), "You can't mint this token, purchase it instead");
 
-        uint burn = tokens.div(20); //5% burn
+        uint burn = tokens.div(50); //2% burn
         uint send = tokens.sub(burn);
         _transfer(to, send);
         _transfer(address(0), burn);
@@ -265,7 +265,7 @@ contract _HERTZ is ERC20Interface, Owned {
         require(address(to) != address(0), "No burning allowed");
         require(address(from) != address(0), "You can't mint this token, purchase it instead");
 
-        uint burn = tokens.div(20); //5% burn
+        uint burn = tokens.div(50); //2% burn
         uint send = tokens.sub(burn);
         _transferFrom(from, to, send);
         _transferFrom(from, address(0), burn);
@@ -333,7 +333,7 @@ contract _HERTZ is ERC20Interface, Owned {
         if(weiPurchase==0) return 0;
         
         uint ret = (weiPurchase.mul(_currentSupply)).div(weiDeposited);
-        ret = ret.mul(10000);
+        ret = ret.sub(ret.div(50)); //2% fee
         return ret;
     }
     
@@ -342,11 +342,10 @@ contract _HERTZ is ERC20Interface, Owned {
 // - You must include decimals for an input.
 // ----------------------------------------------------------------------------
     function tokensToWei(uint tokens) public view returns(uint){
-        tokens = tokens.div(10000);
         if(tokens==0) return 0;
         if(weiDeposited==0) return 0;
         if(_currentSupply==0) return 0;
-
+        tokens = tokens.sub(tokens.div(50)); //2% fee
         uint ret = (weiDeposited.mul(tokens)).div(_currentSupply);
         return ret;
     }
@@ -358,14 +357,15 @@ contract _HERTZ is ERC20Interface, Owned {
     function purchaseTokens() external payable {
         
         uint tokens = weiToTokens(msg.value);
+        require(_currentSupply.add(tokens)<=_totalSupply,"We have reached our contract limit");
 
         //mint new tokens
         emit Transfer(address(0), msg.sender, tokens);
         
         balances[msg.sender] = balances[msg.sender].add(tokens);
         tokensMinted = tokensMinted.add(tokens);
-        _totalSupply = _totalSupply.add(tokens);
-        _currentSupply = _totalSupply;
+        _currentSupply = _currentSupply.add(tokens);
+
         
         weiDeposited = weiDeposited.add(msg.value);
     }
@@ -380,9 +380,8 @@ contract _HERTZ is ERC20Interface, Owned {
         //burn tokens to get wei
         emit Transfer(msg.sender, address(0), tokens);
         balances[msg.sender] = balances[msg.sender].sub(tokens);
-        _totalSupply = _totalSupply.sub(tokens);
-        _currentSupply = _totalSupply;
-        
+        _currentSupply = _currentSupply.sub(tokens);
+
         address(msg.sender).transfer(getWei);
         weiDeposited = weiDeposited.sub(getWei);
     }
