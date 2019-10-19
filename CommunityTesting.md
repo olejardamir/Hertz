@@ -1,11 +1,13 @@
+
+
+
+
 Note: No, this project is not associated with ButtCoin (0xBUTT) in any way, except that the lead developer (myself) is taking it as a separate solo project. In order to see it working without a flaw, usability must be tested before the main launch.
 
 
 
 ## TODO FIXES
-- Add burning fees to exchange, so people can't transfer without burning
-- Burning function must be removed, it can be abused, it is for testing only
-- Error gets thrown after burning, no purchase possible after that point
+- Rotate the ASCII logo in a contract, move the legal notice to a bottom of a contract
 
 If any issues are detected, they will be fixed and links updated on this page and announced to Telegram: https://t.me/joinchat/Ote9nhcPmwqf4Kmh3Fh6Uw
 
@@ -15,7 +17,7 @@ If you have any questions about the steps below, please ask on Telegram: https:/
 The purpose of this document is a tutorial to how to test the Hertz token, and also to provide the instructions on how to obtain and trade the token once it launches.
 
 To inspect the source-code, go to:
-https://ropsten.etherscan.io/address/0x85f447d39a993010c03535fde3b22f15ceead5a3#code
+https://ropsten.etherscan.io/address/0xc0f3c272ea4cf1bc0dc1a76a315758e0f049c310#code
 
 Before you start, you will need Metamask installed in a browser:
 https://metamask.io/
@@ -29,7 +31,7 @@ https://blog.bankex.org/how-to-buy-ethereum-using-metamask-ccea0703daec
 
 
 There are only a few functions that you may want to test. Go to:
-https://ropsten.etherscan.io/address/0x85f447d39a993010c03535fde3b22f15ceead5a3#writeContract
+https://ropsten.etherscan.io/address/0xc0f3c272ea4cf1bc0dc1a76a315758e0f049c310#writeContract
 
 Select “Connect to Web3” and press “OK” if prompted.
 
@@ -45,7 +47,7 @@ Then, try testing any of these functions
 
 
 Try to stress-test the system as much as possible. Imagine that you are a hacker who wants to break the code and get as much Ethereum from the contract as possible.  You may also want to check the numbers with the view functions with their queries:
-https://ropsten.etherscan.io/address/0x85f447d39a993010c03535fde3b22f15ceead5a3#readContract
+https://ropsten.etherscan.io/address/0xc0f3c272ea4cf1bc0dc1a76a315758e0f049c310#readContract
 
 
 Please report any findings here, on telegram or on twitter.
