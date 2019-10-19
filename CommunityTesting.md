@@ -7,7 +7,7 @@ Note: No, this project is not associated with ButtCoin (0xBUTT) in any way, exce
 
 
 ## TODO FIXES
-- None at the moment, still testing...
+- add a "sellAllTokens" function
 
 If any issues are detected, they will be fixed and links updated on this page and announced to Telegram: https://t.me/joinchat/Ote9nhcPmwqf4Kmh3Fh6Uw
 
