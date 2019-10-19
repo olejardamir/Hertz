@@ -31,18 +31,19 @@ HZHZHZHZHZHZHZNm/ /mHZHZHZHZHZHZHZN
 | |  |  |____| | \ \  | |   / /__ 
 |_|  |_________|  \_\ |_|  /_____| V1.0
      
-A stable-coin, with a constantly increasing price.
+A stable-coin, with a constantly increasing market price, and an integrated micro-exchange.
+
+ Symbol        :  HZ
+ Name          :  Hertz Token 
+ Total supply  :  21,000.0 (or 21 thousand tokens)
+ Decimals      :  18
+ Total Supply  :  Infinite, limit depends on how much people want to invest
+ Transfer Fees :  2% deducted from a transfer (a burning fee).
+ Exchange Fees :  2% of tokens deducted per exchange.
+ Author        :  Damir Olejar
+
 */
-// Symbol        :  HZ
-// Name          :  Hertz Token 
-// Total supply  :  21,000.0 (or 21 thousand tokens)
-// Decimals      :  18
-// Total Supply  :  Infinite, limit depends on how much people want to invest
-// Transfer Fees :  2% deducted from a transfer (a burning fee).
-// Exchange Fees :  2% of tokens deducted per exchange.
-// Author        :  Damir Olejar
-//
-// -----------------------------------------------------------------------------------------------------------------------------------------
+ 
 
 // ----------------------------------------------------------------------------
 // Safe maths
