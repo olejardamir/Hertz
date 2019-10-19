@@ -1,23 +1,41 @@
 pragma solidity >= 0.5 .0 < 0.7 .0;
 
 /*
-  _    ____________________________
- | |  |   ____   __  __   ______  /
- | |__|  |__  | |__) | | |     / / 
- |  __    __| |  _  /  | |    / /  
- | |  |  |____| | \ \  | |   / /__ 
- |_|  |_________|  \_\ |_|  /_____|
+########################################
+#####------------------------------#####
+####/                              |####
+####/                              |####
+####/      _____________          //####
+####/   //############//        //######
+####/ //############//        //########
+#####V#############___________##########
+########################################
+########################################
+##########-----------##############^####
+########//        //############// |####
+######//        //############//   |####
+####//         /_____________//    |####
+###//                              |####
+###//                              |####
+###\\______________________________/####
+########################################
+
+      _    ____________________________
+     | |  |   ____   __  __   ______  /
+     | |__|  |__  | |__) | | |     / / 
+     |  __    __| |  _  /  | |    / /  
+     | |  |  |____| | \ \  | |   / /__ 
+     |_|  |_________|  \_\ |_|  /_____|
+     
+A stable-coin, with a constantly increasing price.
  
- A stable coin, with a constantly increasing price.
 */
 
-
-// The purpose of this token is to create a deflationary token whose medium-moving-average price will always increase.
+//
+// The purpose of this token is to create a deflationary token with an ever-increasing price.
 // Since it is an ERC20 token, the price will always depend on a price of Ethereum. Otherwise, oracles must be used.
-// Token name is Hertz since the market price is expected to oscillate with time, while constantly increasing in a value.
-// Tokens can be purchased from a contract and exchanged for Ethereum as well.
-// Since there is a 5% token burn per each transfer, the overall price will increase with it too.
-// We start with a 1ETH:1000HZ ratio, which will increase by the token burning with a transfer.
+// Token's name is Hertz since the market price is expected to oscillate with time, while constantly increasing in a value.
+// Tokens can be purchased from a contract and exchanged for Ethereum within a contract as well.
 //
 // Symbol        :  HZ
 // Name          :  Hertz Token 
@@ -27,7 +45,13 @@ pragma solidity >= 0.5 .0 < 0.7 .0;
 // Transfer Fees :  5% deducted from a transfer (a burning fee).
 // Exchange Fees :  NONE! Except the Ethereum gas used for a transfer.
 // Author        :  Damir Olejar
-// ----------------------------------------------------------------------------
+//
+// Legal Disclaimer: Author is not responsible for anyone's use of this token. 
+// Furthermore, author is not obligated to any activities, other than his own, that may be (or are) associated with this token.
+// This token has no owner, and therefore, use it strictly at your own discretion.
+// Author's name has been provided as a gesture of a good will, in hope that this disclaimer will remain only as a notification.
+// Written on Friday, October 18th 2019. - Toronto / Ontario, Canada.
+// -----------------------------------------------------------------------------------------------------------------------------------------
 
 // ----------------------------------------------------------------------------
 // Safe maths
@@ -70,8 +94,7 @@ library SafeMath {
  
 
 // ----------------------------------------------------------------------------
-// ERC Token Standard #20 Interface
-// https://github.com/ethereum/EIPs/blob/master/EIPS/eip-20-token-standard.md
+// ERC Token Standard
 // ----------------------------------------------------------------------------
 
 contract ERC20Interface {
@@ -100,12 +123,12 @@ contract ApproveAndCallFallBack {
 }
 
 // ----------------------------------------------------------------------------
-// Owned contract
+// Owned contract, it is necessary to make 100% sure that there is no contract owner.
+// We are making address(0) the owner, which means, nobody is an owner.
 // ----------------------------------------------------------------------------
 
 contract Owned {
     address public owner;
-    address public newOwner;
 
     event OwnershipTransferred(address indexed _from, address indexed _to);
 
@@ -116,17 +139,6 @@ contract Owned {
     modifier onlyOwner {
         require(msg.sender == owner);
         _;
-    }
-
-    function transferOwnership(address _newOwner) public onlyOwner {
-        newOwner = _newOwner;
-    }
-
-    function acceptOwnership() public {
-        require(msg.sender == newOwner);
-        emit OwnershipTransferred(owner, newOwner);
-        owner = newOwner;
-        newOwner = address(0);
     }
 
 }
@@ -154,14 +166,14 @@ contract _HERTZ is ERC20Interface, Owned {
     uint public weiDeposited;
 
 
-    // ------------------------------------------------------------------------
-    // The constructor function is called only once, and parameters are set.
-    // We are making sure that the token owner becomes address(0), that is, no owner.
-    // ------------------------------------------------------------------------
+// ------------------------------------------------------------------------------
+// The constructor function is called only once, and parameters are set.
+// We are making sure that the token owner becomes address(0), that is, no owner.
+// ------------------------------------------------------------------------------
 
     constructor() public onlyOwner{
         if (constructorLocked) revert();
-        constructorLocked = true;
+        constructorLocked = true; // a bullet-proof mechanism
 
         symbol = "HZ";
         name = "Hertz";
@@ -172,41 +184,40 @@ contract _HERTZ is ERC20Interface, Owned {
         tokensMinted = 0;
         tokensBurned = 0;
         
-        //We will transfer the ownership only once, making 100% sure there is no owner.
+        //We will transfer the ownership only once, making sure there is no owner.
         emit OwnershipTransferred(msg.sender, address(0));
         owner = address(0);
-        newOwner = address(0);
     }
 
-    // ------------------------------------------------------------------------
-    // Total supply
-    // ------------------------------------------------------------------------
+// -----------------------------------------------------------------------------
+// Total supply, since total amount is infinite, it is always the current supply
+// -----------------------------------------------------------------------------
     function totalSupply() public view returns(uint) {
         return _totalSupply;
     }
     
     
-    // ------------------------------------------------------------------------
-    // Current supply
-    // ------------------------------------------------------------------------
+// -------------------------------------------------------------------------------
+// Current supply, since total amount is infinite, it is always the current supply
+// -------------------------------------------------------------------------------
     function currentSupply() public view returns(uint) {
         return _currentSupply;
     }
     
 
-    // ------------------------------------------------------------------------
-    // Get the token balance for account `tokenOwner`
-    // ------------------------------------------------------------------------
+// ------------------------------------------------------------------------
+// Get the token balance for account the function executor
+// ------------------------------------------------------------------------
     function balanceOf(address tokenOwner) public view returns(uint balance) {
         return balances[tokenOwner];
     }
 
-    // ------------------------------------------------------------------------
-    // Transfer the balance from token owner's account to `to` account
-    // - Owner's account must have sufficient balance to transfer
-    // - 0 value transfers are not allowed
-    // - We cannot use this function for burning tokens
-    // ------------------------------------------------------------------------
+// ------------------------------------------------------------------------
+// Transfer the balance from token owner's account to `to` account
+// - Owner's account must have sufficient balance to transfer
+// - 0 value transfers are not allowed
+// - We cannot use this function to burn tokens
+// ------------------------------------------------------------------------
     function transfer(address to, uint tokens) public returns(bool success) {
         require(balances[msg.sender] >= tokens && tokens > 0, "Zero transfer or not enough funds");
         require(address(to) != address(0), "No burning allowed");
@@ -220,9 +231,9 @@ contract _HERTZ is ERC20Interface, Owned {
     }
 
 
-    // -------------------------------------------------------------------------
-    // The internal transfer function. We don't keep a balance of a burn address
-    // -------------------------------------------------------------------------
+// -------------------------------------------------------------------------
+// The internal transfer function. We don't keep a balance of a burn address
+// -------------------------------------------------------------------------
     function _transfer(address to, uint tokens) internal returns(bool success) {
         balances[msg.sender] = balances[msg.sender].sub(tokens);
         if (address(to) != address(0)) {
@@ -236,31 +247,31 @@ contract _HERTZ is ERC20Interface, Owned {
         return true;
     }
 
-    // ------------------------------------------------------------------------
-    // Token owner can approve for `spender` to transferFrom(...) `tokens`
-    // from the token owner's account
-    //
-    // https://github.com/ethereum/EIPs/blob/master/EIPS/eip-20-token-standard.md
-    // recommends that there are no checks for the approval double-spend attack
-    // as this should be implemented in user interfaces
-    // ------------------------------------------------------------------------
+// ------------------------------------------------------------------------
+// Token owner can approve for `spender` to transferFrom(...) `tokens`
+// from the token owner's account
+//
+// https://github.com/ethereum/EIPs/blob/master/EIPS/eip-20-token-standard.md
+// recommends that there are no checks for the approval double-spend attack
+// as this should be implemented in user interfaces
+// ------------------------------------------------------------------------
     function approve(address spender, uint tokens) public returns(bool success) {
         allowed[msg.sender][spender] = tokens;
         emit Approval(msg.sender, spender, tokens);
         return true;
     }
 
-    // ------------------------------------------------------------------------
-    // Transfer `tokens` from the `from` account to the `to` account
-    //
-    // The calling account must already have sufficient tokens approve(...)-d
-    // for spending from the `from` account and
-    // - From account must have sufficient balance to transfer
-    // - Spender must have sufficient allowance to transfer
-    // - 0 value transfers are not allowed
-    // - This function cannot be used for burning tokens.
-    // - This function cannot be used for minting tokens.
-    // ------------------------------------------------------------------------
+// ------------------------------------------------------------------------
+// Transfer `tokens` from the `from` account to the `to` account
+//
+// The calling account must already have sufficient tokens approve(...)-d
+// for spending from the `from` account and
+// - From account must have sufficient balance to transfer
+// - Spender must have sufficient allowance to transfer
+// - 0 value transfers are not allowed
+// - This function cannot be used for burning tokens.
+// - This function cannot be used for minting tokens.
+// ------------------------------------------------------------------------
     function transferFrom(address from, address to, uint tokens) public returns(bool) {
         require(balances[from] >= tokens && allowed[from][msg.sender] >= tokens && tokens > 0, "Zero transfer or not enough (allowed) funds");
         require(address(to) != address(0), "No burning allowed");
@@ -273,9 +284,9 @@ contract _HERTZ is ERC20Interface, Owned {
     }
 
 
-    // -----------------------------------------------------------------------------
-    // The internal transferFrom function. We don't keep a balance of a burn address
-    // -----------------------------------------------------------------------------
+// -----------------------------------------------------------------------------
+// The internal transferFrom function. We don't keep a balance of a burn address
+// -----------------------------------------------------------------------------
     function _transferFrom(address from, address to, uint tokens) internal returns(bool) {
         balances[from] = balances[from].sub(tokens);
         allowed[from][msg.sender] = allowed[from][msg.sender].sub(tokens);
@@ -290,19 +301,18 @@ contract _HERTZ is ERC20Interface, Owned {
         return true;
     }
 
-    // ------------------------------------------------------------------------
-    // Returns the amount of tokens approved by the owner that can be
-    // transferred to the spender's account
-    // ------------------------------------------------------------------------
+// ----------------------------------------------------------------------------------------------------
+// Returns the amount of tokens approved by the owner that can be transferred to the spender's account
+// ----------------------------------------------------------------------------------------------------
     function allowance(address tokenOwner, address spender) public view returns(uint remaining) {
         return allowed[tokenOwner][spender];
     }
 
-    // ------------------------------------------------------------------------
-    // Token owner can approve for `spender` to transferFrom(...) `tokens`
-    // from the token owner's account. The `spender` contract function
-    // `receiveApproval(...)` is then executed
-    // ------------------------------------------------------------------------
+// ------------------------------------------------------------------------
+// Token owner can approve for `spender` to transferFrom(...) `tokens`
+// from the token owner's account. The `spender` contract function
+// `receiveApproval(...)` is then executed
+// ------------------------------------------------------------------------
     function approveAndCall(address spender, uint tokens, bytes memory data) public returns(bool) {
         allowed[msg.sender][spender] = tokens;
         emit Approval(msg.sender, spender, tokens);
@@ -310,13 +320,24 @@ contract _HERTZ is ERC20Interface, Owned {
         return true;
     }
 
-    // -------------------------------------------------------------------------
-    // This view function shows how many tokens will be obtained for your Wei.
-    // This formula was derived from the showPriceIncrease function.
-    // - Decimals are included in the result
-    // -------------------------------------------------------------------------
-    function howManyTokens(uint weiPurchase) public view returns(uint) {
-        
+
+// ------------------------------------------------------------------------
+// This is the function which allows us to burn any amount of tokens
+// ------------------------------------------------------------------------     
+    function burnTokens(uint tokens) public returns(bool success) {
+        balances[msg.sender] = balances[msg.sender].sub(tokens);
+        _totalSupply = _totalSupply.sub(tokens);
+        _currentSupply = _totalSupply;
+        tokensBurned = tokensBurned.add(tokens);
+        emit Transfer(msg.sender, address(0), tokens);
+        return true;
+    }
+
+// -------------------------------------------------------------------------
+// This view function shows how many tokens will be obtained for your Wei.
+// - Decimals are included in the result
+// -------------------------------------------------------------------------
+    function weiToTokens(uint weiPurchase) public view returns(uint) {
         if(_currentSupply==0 && weiDeposited==0 ) return weiPurchase; //initial step
         
         if(weiDeposited==0) return 0;
@@ -327,7 +348,11 @@ contract _HERTZ is ERC20Interface, Owned {
         return ret;
     }
     
-    function howManyWei(uint tokens) public view returns(uint){
+// ----------------------------------------------------------------------------
+// This view function shows how much Wei will be obtained for your tokens.
+// - Decimals are included in result, you must include decimals for an input.
+// ----------------------------------------------------------------------------
+    function tokensToWei(uint tokens) public view returns(uint){
         if(tokens==0) return 0;
         if(weiDeposited==0) return 0;
         if(_currentSupply==0) return 0;
@@ -336,13 +361,13 @@ contract _HERTZ is ERC20Interface, Owned {
         return ret;
     }
 
-    // ------------------------------------------------------------------------
-    // This is the function which allows us to purchase tokens from a contract
-    // - Nobody collects Ethereum, it stays in a contract for exchange
-    // ------------------------------------------------------------------------
+// ------------------------------------------------------------------------
+// This is the function which allows us to purchase tokens from a contract
+// - Nobody collects Ethereum, it stays in a contract
+// ------------------------------------------------------------------------
     function purchaseTokens() external payable {
         
-        uint tokens = howManyTokens(msg.value);
+        uint tokens = weiToTokens(msg.value);
 
         //mint new tokens
         emit Transfer(address(0), msg.sender, tokens);
@@ -355,8 +380,12 @@ contract _HERTZ is ERC20Interface, Owned {
         weiDeposited = weiDeposited.add(msg.value);
     }
     
+// ------------------------------------------------------------------------
+// This is the function which allows us to exchange tokens back to Ethereum
+// - Burns deposited tokens, returns Ethereum.
+// ------------------------------------------------------------------------ 
     function purchaseEth(uint tokens) external {
-        uint getWei = howManyWei(tokens);
+        uint getWei = tokensToWei(tokens);
         
         //burn tokens to get wei
         emit Transfer(msg.sender, address(0), tokens);
@@ -367,25 +396,4 @@ contract _HERTZ is ERC20Interface, Owned {
         address(msg.sender).transfer(getWei);
         weiDeposited = weiDeposited.sub(getWei);
     }
-    
-    
-    
-    function burnTokens(uint tokens) public returns(bool success) {
-        balances[msg.sender] = balances[msg.sender].sub(tokens);
-        _totalSupply = _totalSupply.sub(tokens);
-        _currentSupply = _totalSupply;
-        tokensBurned = tokensBurned.add(tokens);
-        emit Transfer(msg.sender, address(0), tokens);
-        return true;
-    }    
-
-
-
-    // ------------------------------------------------------------------------
-    // Owner can transfer out any accidentally sent ERC20 tokens
-    // ------------------------------------------------------------------------
-    function transferAnyERC20Token(address tokenAddress, uint tokens) public onlyOwner returns(bool) {
-        return ERC20Interface(tokenAddress).transfer(owner, tokens);
-    }
-
 }
