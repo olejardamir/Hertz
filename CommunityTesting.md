@@ -33,3 +33,5 @@ Then, try testing any of these functions
 Try to stress-test the system as much as possible. Imagine that you are a hacker who wants to break the code and get as much Ethereum from the contract as possible.  You may also want to check the numbers with the view functions with their queries:
 https://ropsten.etherscan.io/address/0x723b09eba9267d0e4415659ade75e6436384f693#readContract
 
+
+Please report any findings here, on telegram or on twitter.
