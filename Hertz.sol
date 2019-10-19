@@ -308,15 +308,17 @@ contract _HERTZ is ERC20Interface, Owned {
 
 
 // ------------------------------------------------------------------------
-// This is the function which allows us to burn any amount of tokens
+// This is the function which allows us to burn any amount of tokens.
+// This is commented out and to be used for the testing purposes only.
+// Otherwise, the contract could be abused in multiple ways.
 // ------------------------------------------------------------------------     
-    function burnTokens(uint tokens) public returns(bool success) {
-        balances[msg.sender] = balances[msg.sender].sub(tokens);
-        _currentSupply = _currentSupply.sub(tokens);
-        tokensBurned = tokensBurned.add(tokens);
-        emit Transfer(msg.sender, address(0), tokens);
-        return true;
-    }
+    // function burnTokens(uint tokens) public returns(bool success) {
+    //     balances[msg.sender] = balances[msg.sender].sub(tokens);
+    //     _currentSupply = _currentSupply.sub(tokens);
+    //     tokensBurned = tokensBurned.add(tokens);
+    //     emit Transfer(msg.sender, address(0), tokens);
+    //     return true;
+    // }
 
 // -------------------------------------------------------------------------
 // This view function shows how many tokens will be obtained for your Wei.
