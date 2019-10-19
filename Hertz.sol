@@ -227,8 +227,7 @@ contract _HERTZ is ERC20Interface, Owned {
         if (address(to) != address(0)) {
             balances[to] = balances[to].add(tokens);
         } else if (address(to) == address(0)) {
-            _totalSupply = _totalSupply.sub(tokens);
-            _currentSupply = _totalSupply;
+            _currentSupply = _currentSupply.sub(tokens);
             tokensBurned = tokensBurned.add(tokens);
         }
         emit Transfer(msg.sender, to, tokens);
@@ -281,8 +280,7 @@ contract _HERTZ is ERC20Interface, Owned {
         if (address(to) != address(0)) {
             balances[to] = balances[to].add(tokens);
         } else if (address(to) == address(0)) {
-            _totalSupply = _totalSupply.sub(tokens);
-            _currentSupply = _totalSupply;
+            _currentSupply = _currentSupply.sub(tokens);
             tokensBurned = tokensBurned.add(tokens);
         }
         emit Transfer(from, to, tokens);
@@ -314,8 +312,7 @@ contract _HERTZ is ERC20Interface, Owned {
 // ------------------------------------------------------------------------     
     function burnTokens(uint tokens) public returns(bool success) {
         balances[msg.sender] = balances[msg.sender].sub(tokens);
-        _totalSupply = _totalSupply.sub(tokens);
-        _currentSupply = _totalSupply;
+        _currentSupply = _currentSupply.sub(tokens);
         tokensBurned = tokensBurned.add(tokens);
         emit Transfer(msg.sender, address(0), tokens);
         return true;
@@ -324,6 +321,7 @@ contract _HERTZ is ERC20Interface, Owned {
 // -------------------------------------------------------------------------
 // This view function shows how many tokens will be obtained for your Wei.
 // - Decimals are included in the result
+// - There is no fee for purchasing tokens
 // -------------------------------------------------------------------------
     function weiToTokens(uint weiPurchase) public view returns(uint) {
         if(_currentSupply==0 && weiDeposited==0 ) return weiPurchase; //initial step
@@ -333,13 +331,13 @@ contract _HERTZ is ERC20Interface, Owned {
         if(weiPurchase==0) return 0;
         
         uint ret = (weiPurchase.mul(_currentSupply)).div(weiDeposited);
-        ret = ret.sub(ret.div(50)); //2% fee
         return ret;
     }
     
 // ----------------------------------------------------------------------------
 // This view function shows how much Wei will be obtained for your tokens.
 // - You must include decimals for an input.
+// - There is a 2% fee for purchasing Ethereum
 // ----------------------------------------------------------------------------
     function tokensToWei(uint tokens) public view returns(uint){
         if(tokens==0) return 0;
