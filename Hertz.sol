@@ -1,7 +1,6 @@
 pragma solidity >= 0.5 .0 < 0.7 .0;
 
 /*
-
 +-----------------------------------+
 |HZHZHZHZHZHZHZHZ/ /HZHZHZHZHZHZHZHZ|
 |HZHZHZHZHZHZHZH`   `HZHZHZHZHZHZHZH|
@@ -45,8 +44,6 @@ A deflationary stable-coin, with a constantly increasing price.
  
 */
 
-
-
 // ----------------------------------------------------------------------------
 // Safe maths
 // ----------------------------------------------------------------------------
@@ -83,8 +80,6 @@ library SafeMath {
     }
 
 }
-
- 
 
 // ----------------------------------------------------------------------------
 // ERC Token Standard
@@ -135,7 +130,6 @@ contract Owned {
         require(msg.sender == owner);
         _;
     }
-
 }
 
 // ----------------------------------------------------------------------------
@@ -157,7 +151,6 @@ contract _HERTZ is ERC20Interface, Owned {
     mapping(address => mapping(address => uint)) allowed;
     uint public weiDeposited;
 
-
 // ------------------------------------------------------------------------------
 // The constructor function is called only once, and parameters are set.
 // We are making sure that the token owner becomes address(0), that is, no owner.
@@ -178,31 +171,31 @@ contract _HERTZ is ERC20Interface, Owned {
         owner = address(0);
     }
 
-// -----------------------------------------------------------------------------
-// Total supply, since total amount is infinite, it is always the current supply
-// -----------------------------------------------------------------------------
+// ------------------------------------------------------------------------------
+// Total supply
+// ------------------------------------------------------------------------------
     function totalSupply() public view returns(uint) {
         return _totalSupply;
     }
     
     
-// -------------------------------------------------------------------------------
-// Current supply, since total amount is infinite, it is always the current supply
-// -------------------------------------------------------------------------------
+// ------------------------------------------------------------------------------
+// Current supply
+// ------------------------------------------------------------------------------
     function currentSupply() public view returns(uint) {
         return _currentSupply;
     }
     
 
-// ------------------------------------------------------------------------
-// Get the token balance for account the function executor
-// ------------------------------------------------------------------------
+// ------------------------------------------------------------------------------
+// Get the token balance for the account
+// ------------------------------------------------------------------------------
     function balanceOf(address tokenOwner) public view returns(uint balance) {
         return balances[tokenOwner];
     }
 
 // ------------------------------------------------------------------------
-// Transfer the balance from token owner's account to `to` account
+// Transfer the tokens from owner's account to a `to` account
 // - Owner's account must have sufficient balance to transfer
 // - 0 value transfers are not allowed
 // - We cannot use this function to burn tokens
@@ -247,8 +240,7 @@ contract _HERTZ is ERC20Interface, Owned {
 // ------------------------------------------------------------------------
 // Transfer `tokens` from the `from` account to the `to` account
 //
-// The calling account must already have sufficient tokens approve(...)-d
-// for spending from the `from` account and
+// The calling account must already have sufficient tokens approved
 // - From account must have sufficient balance to transfer
 // - Spender must have sufficient allowance to transfer
 // - 0 value transfers are not allowed
@@ -265,7 +257,6 @@ contract _HERTZ is ERC20Interface, Owned {
         _transferFrom(from, to, send);
         _transferFrom(from, address(0), burn);
     }
-
 
 // -----------------------------------------------------------------------------
 // The internal transferFrom function. We don't keep a balance of a burn address
@@ -301,7 +292,6 @@ contract _HERTZ is ERC20Interface, Owned {
         return true;
     }
 
-
 // ------------------------------------------------------------------------
 // This is a function which allows us to burn any amount of tokens.
 // This is commented out and to be used for the testing purposes only.
@@ -315,6 +305,7 @@ contract _HERTZ is ERC20Interface, Owned {
     //     return true;
     // }
 
+
 // -------------------------------------------------------------------------
 // This view function shows how many tokens will be obtained for your Wei.
 // - Decimals are included in the result
@@ -322,10 +313,8 @@ contract _HERTZ is ERC20Interface, Owned {
 // -------------------------------------------------------------------------
     function weiToTokens(uint weiPurchase) public view returns(uint) {
         if(_currentSupply==0 && weiDeposited==0 ) return weiPurchase; //initial step
-        if(weiDeposited==0) return 0;
-        if(_currentSupply==0) return 0;
-        if(weiPurchase==0) return 0;
-        
+        if(weiDeposited==0 || _currentSupply==0 || weiPurchase==0) return 0;
+
         uint ret = (weiPurchase.mul(_currentSupply)).div(weiDeposited);
         ret = ret.sub(ret.div(50)); //2% fee
         return ret;
@@ -337,9 +326,7 @@ contract _HERTZ is ERC20Interface, Owned {
 // - There is no fee for converting to Ethereum
 // ----------------------------------------------------------------------------
     function tokensToWei(uint tokens) public view returns(uint){
-        if(tokens==0) return 0;
-        if(weiDeposited==0) return 0;
-        if(_currentSupply==0) return 0;
+        if(tokens==0 || weiDeposited==0 || _currentSupply==0) return 0;
         uint ret = (weiDeposited.mul(tokens)).div(_currentSupply);
         return ret;
     }
@@ -362,7 +349,6 @@ contract _HERTZ is ERC20Interface, Owned {
         balances[msg.sender] = balances[msg.sender].add(tokens);
         _currentSupply = _currentSupply.add(tokens);
 
-        
         weiDeposited = weiDeposited.add(msg.value);
     }
     
