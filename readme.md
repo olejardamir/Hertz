@@ -13,8 +13,8 @@ For this reason, I have decided to make this a solo-project, unrelated to any pa
 - Decimals: 18. Since token price will always increase, zeros will become very important.
 - Total Supply: 21000 tokens. Since we are using 18 decimals, 21000 tokens is enough to make traders put a token on exchanges due to a low supply, and sell it.
 - Minting: when the current supply reaches 21000 we cannot mint more tokens. However, when tokens are burned by transferring or by exchanging back to Ethereum within a contract, the number becomes lower, and we can mint them again using the contract.
-- Current Supply: The current supply shows the current amount of circulating tokens.
-- Trade fees: No fees for a token purchase, 2% for converting back to Ethereum. Initial idea was to have no fees at all, however, people could avoid burning the token by converting it to Ethereum. This is an initiative to ensure that token will be used as intended, at least once.
+- Current Supply: The current supply shows the current amount of circulating tokens. The current supply is reduced by burning and increased by purchasing tokens from a contract.
+- Trade fees: No fees for a token purchase, 2% for converting back to Ethereum. Initial idea was to have no fees at all, however, people could avoid burning Hertz by converting it to Ethereum. This is only a safety mechanism making sure that Hertz will be used as intended, at least once.
 - Everyone profits when Ethereum is taken away from the contract.
 - Everyone profits when token is transferred from one account to another.
 - Starting price: 1 Ethereum = 1 Hertz. From that point, Hertz price is always increasing.
