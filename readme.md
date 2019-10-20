@@ -70,16 +70,24 @@ function _transferFrom(address from, address to, uint tokens) internal returns(b
 This is a helper function, used to separate the burning fee from a transfer. It is used only to make the code cleaner.
 
 ### Public functions
-``` js function transfer(address to, uint tokens) public returns(bool success) { ```
+``` js 
+function transfer(address to, uint tokens) public returns(bool success) { 
+```
 A transfer function with a 2% fee. 2% of tokens get burned and a circulating supply reduced by the same amount of tokens. No zeto transfers are allowed. No burning allowed. No minting allowed. Checks if balance is 
 
-``` js function transferFrom(address from, address to, uint tokens) public returns(bool success) { ```
+``` js 
+function transferFrom(address from, address to, uint tokens) public returns(bool success) { 
+```
 Same as the transfer function except that we must include the from and to addresses with the approved amount.
 
-``` js function approve(address spender, uint tokens) public returns(bool success) { ```
+``` js 
+function approve(address spender, uint tokens) public returns(bool success) { 
+```
 The approve function for the transferFrom function, usual token standard.
 
-``` js function approveAndCall(address spender, uint tokens, bytes memory data) public returns(bool) { ```
+``` js 
+function approveAndCall(address spender, uint tokens, bytes memory data) public returns(bool) { 
+```
 The approve and call function for the transferFrom function, usual token standard.
 
 ``` js function purchaseEth(uint tokens) public { ```
