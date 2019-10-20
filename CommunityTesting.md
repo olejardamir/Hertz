@@ -1,4 +1,7 @@
-0x3f8fCBB5aA8D32aa5730f602802ea0EF3B9ed0E5
+
+
+
+ 
 
 
 
@@ -21,7 +24,7 @@ If you have any questions about the steps below, please ask on Telegram: https:/
 The purpose of this document is a tutorial to how to test the Hertz token, and also to provide the instructions on how to obtain and trade the token once it launches.
 
 To inspect the source-code, go to:
-https://ropsten.etherscan.io/address/0x3f8fCBB5aA8D32aa5730f602802ea0EF3B9ed0E5#code
+https://ropsten.etherscan.io/address/0xE4c04D8C3A4f2de24634d1347697a8E388984F91#code
 
 Before you start, you will need Metamask installed in a browser:
 https://metamask.io/
@@ -35,7 +38,7 @@ https://blog.bankex.org/how-to-buy-ethereum-using-metamask-ccea0703daec
 
 
 There are only a few functions that you may want to test. Go to:
-https://ropsten.etherscan.io/address/0x3f8fCBB5aA8D32aa5730f602802ea0EF3B9ed0E5#writeContract
+https://ropsten.etherscan.io/address/0xE4c04D8C3A4f2de24634d1347697a8E388984F91#writeContract
 
 Select “Connect to Web3” and press “OK” if prompted.
 
@@ -51,7 +54,7 @@ Then, try testing any of these functions
 
 
 Try to stress-test the system as much as possible. Imagine that you are a hacker who wants to break the code and get as much Ethereum from the contract as possible.  You may also want to check the numbers with the view functions with their queries:
-https://ropsten.etherscan.io/address/0x3f8fCBB5aA8D32aa5730f602802ea0EF3B9ed0E5#readContract
+https://ropsten.etherscan.io/address/0xE4c04D8C3A4f2de24634d1347697a8E388984F91#readContract
 
 
 Please report any findings here, on telegram or on twitter.
