@@ -90,6 +90,15 @@ function approveAndCall(address spender, uint tokens, bytes memory data) public 
 ```
 The approve and call function for the transferFrom function, usual token standard.
 
-``` js function purchaseEth(uint tokens) public { ```
-``` js function sellAllTokens() public { ```
+``` js 
+function purchaseEth(uint tokens) public { 
+```
+Use this function to exchange your tokens back to Ethereum. The 2% charge will take an effect. You must include all 18 decimals. No zero purchases are allowed.
 
+
+``` js 
+function sellAllTokens() public { 
+```
+This is a function to exchange all of the HZ tokens you got available without worrying about the decimals.
+
+### View functions
