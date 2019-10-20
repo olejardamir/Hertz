@@ -59,5 +59,14 @@ function purchaseTokens() external payable {
 This is a function which enables the purchase of Hertz tokens. Since the contract doesn't belong to anyone, nobody has an access to Ethereum deposited to a contract. Therefore, only the addresses who made an Ethereum deposit can have an access to Ethereum by exchanging their HZ tokens to Ethereum. Once the 21000 tokens are minted, this function will not produce any more tokens. However, when tokens are burned, this function can be used again. Tokens are burned by doing a transfer or by purchasing ETH for HZ tokens. Zero purchases are not allowed.
 
 ### Internal functions
+``` js
+function _transfer(address to, uint tokens) internal returns(bool success) {
+```
+This is a helper function, used to separate the burning fee from a transfer. It is used only to make the code cleaner.
+
+``` js
+function _transferFrom(address from, address to, uint tokens) internal returns(bool) {
+```
+This is a helper function, used to separate the burning fee from a transfer. It is used only to make the code cleaner.
 
 
