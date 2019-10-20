@@ -6,7 +6,7 @@ DEPLOYMENT ADDRESS:
 
 
 ## Story behind, and a personal note ...
-While coding a project which is supposed to allow people to mine BTC model without any hardware, thinking about what I am doing and why, I tried to come to a core explanation to all crypto-currencies and their market affairs. No matter how bad or good the project is, no matter what technology is applied, none of this matters as long as it can turn cents into dollars. It was a time to stop the coding and doing the complex things in vain, and simply follow the conclusion. What would happen if there were a stable-coin with a constantly increasing price ? If we can have stable-coins with a stable price relative to anything, then why not constantly increase that price ? what features must exist, and how would it work ? 
+While coding a project which is supposed to allow people to mine BTC model without any hardware, thinking about what I am doing and why, I tried to come up with a core explanation to all crypto-currencies and their market affairs. No matter how bad or good the project is, no matter what technology is applied, none of this matters as long as it can turn cents into dollars. It was a time to stop the coding and doing the complex things in vain, and simply follow the conclusion. What would happen if there were a stable-coin with a constantly increasing price ? If we can have stable-coins with a stable price relative to anything, then why not constantly increase that price ? what features must exist, and how would it work ? 
 
 All of these questions had some solution, however, it took a lot of thinking to come up with the best one.  As a great fan of a current fad called “deflationary coins”, I have noticed something awfully wrong with them... Although deflationary, their prices weren’t changing no matter how big or small the supply was. As a main developer of a project called ButtCoin (The Reaper, and Snayl), I have noticed one basic and simplest fact about people who are interested in the crypto-currencies... The truth is, majority of people simply want to make the money, and therefore good project is the one which helps them make the money. Furthermore, there is a very small amount of individuals who would contribute their hard efforts to any project, and for free. As a consequence, projects can gain the required publicity by depositing their investments, while at the end everyone ends-up losing to new technologies or the market manipulations.  It is just a matter of a time and a question of “when ?” the zero-sum (as in a game theory) kicks-in. Therefore, good projects are also the ones that simply prolong the inevitable destruction and a ruin (either financial or by the competing technologies). I have also seen great projects getting destroyed and burned to a ground with people losing their money in tears... 
 
@@ -15,6 +15,8 @@ For this reason, I have decided to make this a solo-project, unrelated to any pa
 ## Stolen project, early stage
 While discussing Hertz online during a development, the eavesdroppers have done their task and created a poor copy of Hertz token. Please be aware of the other projects which claim to do the same thing as Hertz. If some project claims that they have borrowed Hertz code, please double-check their source-code to avoid getting scammed. It is extremely easy to turn this project into a ponzi-shceme. Furthermore, Check their source code history for any development, and you will see which one was gradually developed and which one was a copy-paste and a mockery. 
 
+### Ponzi schemes
+TODO...
 
 ## How does it work ?
 The explanation is very simple. Imagine people putting money on one pile. Each time you want to take the money back, you have to leave 2% on the pile. Furthermore, each time you want to tell that someone else owns the money, you contribute 2% to a pile. The 2% that remain on a pile are shared with everyone since the Hertz token simply tells how much of a pile you own rather than how much of money you own. Therefore, nobody can lose more than 2% of what they put on a pile, while everyone profits together. This is how we can have a deflationary stable-coin where nobody loses and where everyone gains at all time.
@@ -73,7 +75,7 @@ This is a helper function, used to separate the burning fee from a transfer. It 
 ``` js 
 function transfer(address to, uint tokens) public returns(bool success) { 
 ```
-A transfer function with a 2% fee. 2% of tokens get burned and a circulating supply reduced by the same amount of tokens. No zeto transfers are allowed. No burning allowed. No minting allowed. Checks if balance is 
+A transfer function with a 2% fee. 2% of tokens get burned and a circulating supply reduced by the same amount of tokens. No zeto transfers are allowed. No burning allowed. No minting allowed. Checks if balance is greater or equal to tokens amount.
 
 ``` js 
 function transferFrom(address from, address to, uint tokens) public returns(bool success) { 
@@ -105,19 +107,24 @@ This is a function to exchange all of the HZ tokens you got available without wo
 ``` js 
 function totalSupply() public view returns(uint) { 
 ```
+Displays the total supply of tokens (which is 21000).
 
 ``` js 
 function balanceOf(address tokenOwner) public view returns(uint balance) { 
 ```
+Displays the token amount for the tokenOwner address. This is a strandard ERC20 token function.
 
 ``` js 
 function allowance(address tokenOwner, address spender) public view returns(uint remaining) { 
 ```
+Displasy the allowance amount for a transferFrom function. This is a strandard ERC20 token function.
 
 ``` js 
 function tokensToWei(uint tokens) public view returns(uint) { 
 ```
+Shows how much wei you can get for the entered amount of tokens.
 
 ``` js 
 function weiToTokens(uint weiPurchase) public view returns(uint) { 
 ```
+Shows how much tokens you will get for the entered amount of wei, given the current token price.
