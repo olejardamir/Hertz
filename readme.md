@@ -128,3 +128,25 @@ Shows how much wei you can get for the entered amount of tokens.
 function weiToTokens(uint weiPurchase) public view returns(uint) { 
 ```
 Shows how much tokens you will get for the entered amount of wei, given the current token price.
+
+### Declared variables
+```symbol``` Token symbol (HZ)
+
+```name``` Token name (Hertz)
+
+```decimals``` 18
+
+```_totalSupply``` 21000
+
+```_currentSupply``` 0 (initiated)
+
+```_DECIMALSCONSTANT``` 18
+
+```weiDeposited``` 0 (initiated)
+
+```balances``` a map
+
+```allowed``` a map
+
+```constructorLocked``` true (after running a constructor)
+
