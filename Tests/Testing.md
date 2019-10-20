@@ -14,3 +14,8 @@ Inspect each transaction data for validity
 3. Initial purchase didn't apply the 2% fee, corrected!
 -Problem: when taking a 2% fee from an initial purchase, the next purchase becomes more expensive. This can suggest a ponzi scheme.
 Therefore, we must reduce from ETH instead.
+
+3. OK
+4. OK
+5. OK
+6. OK
