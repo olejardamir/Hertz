@@ -49,3 +49,15 @@ The explanation is very simple. Imagine people putting money on one pile. Each t
 - It is my highest hope that bots will work together with the human traders and holders, and that everyone will profit. This is simply because bots can profit from arbitrage between the contract’s price and the exchanges. When this happens, we will have a constant and a straight line of an increasing price. This way, we will all profit from the bots as the bots will profit from the token and exchanges.
 
 - A new deflationary token will be created by someone else to deflate Hertz once we reach 21000 tokens as a current supply... or once we start using too many zeros; since the prices may become too high on exchanges. Furthermore the bots could take the arbitrage as an advantage earning more than others can earn if there is a large gap between the contract price and a market price. This deflationary token, however, is not going to be made by Hertz (or me), while the general source-code will be available to everyone.
+
+## Source code review
+
+### External functions
+``` js
+function purchaseTokens() external payable {
+```
+This is a function which enables the purchase of Hertz tokens. Since the contract doesn't belong to anyone, nobody has an access to Ethereum deposited to a contract. Therefore, only the addresses who made an Ethereum deposit can have an access to Ethereum by exchanging their HZ tokens to Ethereum. Once the 21000 tokens are minted, this function will not produce any more tokens. However, when tokens are burned, this function can be used again. Tokens are burned by doing a transfer or by purchasing ETH for HZ tokens. Zero purchases are not allowed.
+
+### Internal functions
+
+
