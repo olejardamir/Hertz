@@ -356,20 +356,17 @@ contract _HERTZ is ERC20Interface, Owned {
 // This is the function which allows us to exchange tokens back to Ethereum
 // - Burns deposited tokens, returns Ethereum.
 // ------------------------------------------------------------------------ 
-    function purchaseEth(uint tokens) public {
-        require(tokens>0);
-        
-        uint getWei = tokensToWei(tokens);
-        require(getWei>0);
-        
-        //burn tokens to get wei
-        emit Transfer(msg.sender, address(0), tokens);
-        balances[msg.sender] = balances[msg.sender].sub(tokens);
-        _currentSupply = _currentSupply.sub(tokens);
-
-        address(msg.sender).transfer(getWei);
-        weiDeposited = weiDeposited.sub(getWei);
-    }
+    // function purchaseEth(uint tokens) public {
+    //     require(tokens>0);
+    //     uint getWei = tokensToWei(tokens);
+    //     require(getWei>0);
+    //     //burn tokens to get wei
+    //     emit Transfer(msg.sender, address(0), tokens);
+    //     balances[msg.sender] = balances[msg.sender].sub(tokens);
+    //     _currentSupply = _currentSupply.sub(tokens);
+    //     address(msg.sender).transfer(getWei);
+    //     weiDeposited = weiDeposited.sub(getWei);
+    // }
     
 // ------------------------------------------------------------------------
 // This is the function which allows us to exchange all tokens back to Ethereum
