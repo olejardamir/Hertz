@@ -102,3 +102,22 @@ function sellAllTokens() public {
 This is a function to exchange all of the HZ tokens you got available without worrying about the decimals.
 
 ### View functions
+``` js 
+function totalSupply() public view returns(uint) { 
+```
+
+``` js 
+function balanceOf(address tokenOwner) public view returns(uint balance) { 
+```
+
+``` js 
+function allowance(address tokenOwner, address spender) public view returns(uint remaining) { 
+```
+
+``` js 
+function tokensToWei(uint tokens) public view returns(uint) { 
+```
+
+``` js 
+function weiToTokens(uint weiPurchase) public view returns(uint) { 
+```
