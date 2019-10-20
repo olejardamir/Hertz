@@ -26,9 +26,21 @@ The explanation is very simple. Imagine people putting money on one pile. Each t
 If you believe in a long-term holding of Ethereum, and if you can afford a 2% loss of your Ethereum, then you can use this token for the safe keeping with a high probability of getting more Ethereum than you have initially deposited. 
 
 ## How to purchase from the contract 
-TODO...
+To purchase directly from a contract, there are a few steps involved.
 
-## Hod to get ETH back from the contract
+- The best way is to install Metamask plugin for your browser.
+- Go to https://etherscan.io/token/0x6a4b6316d1d03d2f2b3a0294502f8faf0f38ca14#writeContract
+- Locate the text that says " Write Contract Connect to Web3" and press the "Connect to Web3".
+- Accept all popups and interactions with Metamask (if prompted).
+- Locate the field which says "purchaseTokens", type in the amount of Ethereum you'd wish to use.
+- Please have some additional ETH for the GAS fees (always type in less than the maximum that you hold).
+- Press the blue "write" button under "purchaseTokens", and accept the Metamask popup notification.
+- Your Ethereum will be deposited and HZ tokens sent to you.
+- You may need to add the token to Metamask using the contract ID: 0x6a4b6316d1d03d2f2b3a0294502f8faf0f38ca14
+- You can also search your ETH address on etherscan.io to see whether you got the tokens.
+
+## How to get ETH back from the contract
+The procedure is the same as the "How to purchase from the contract" explained above. However, instead of pressing the write button under "purchaseTokens", you can use the sellAllTokens to exchange all HZ you got.  If you want to specify the amount of HZ, use the "purchaseEth" field and remember to type in 18 decimals too (there is no decimal point).
 
 ## About
 - Pre-minted: 0
@@ -43,7 +55,6 @@ TODO...
 - Starting price: 1 Ethereum = 1 Hertz. From that point, Hertz price is always increasing.
 - Minimum purchase: 0.000000000000000001
 - Maximum purchase: Total Supply minus Current Supply
-
 
 
 ## Performance and expectations
