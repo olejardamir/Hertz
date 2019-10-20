@@ -312,11 +312,10 @@ contract _HERTZ is ERC20Interface, Owned {
 // - There is no fee for purchasing tokens
 // -------------------------------------------------------------------------
     function weiToTokens(uint weiPurchase) public view returns(uint) {
-        if(_currentSupply==0 && weiDeposited==0 ) return weiPurchase.sub(weiPurchase.div(50)); //initial step, %2 fee applies
+        if(_currentSupply==0 && weiDeposited==0 ) return weiPurchase; //initial step
         if(weiDeposited==0 || _currentSupply==0 || weiPurchase==0) return 0;
 
         uint ret = (weiPurchase.mul(_currentSupply)).div(weiDeposited);
-        ret = ret.sub(ret.div(50)); //2% fee
         return ret;
     }
     
@@ -328,6 +327,7 @@ contract _HERTZ is ERC20Interface, Owned {
     function tokensToWei(uint tokens) public view returns(uint){
         if(tokens==0 || weiDeposited==0 || _currentSupply==0) return 0;
         uint ret = (weiDeposited.mul(tokens)).div(_currentSupply);
+        ret = ret.sub(ret.div(50)); //%2 fee, it stays to be shared with everyone
         return ret;
     }
 
