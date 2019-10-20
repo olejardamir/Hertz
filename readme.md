@@ -1,9 +1,12 @@
+
+<p align="center">HERTZ (Erc20 token whitepaper)</p>
+<p align="center">0x6a4b6316D1d03d2f2B3A0294502F8fAF0F38cA14</p>
+
+
 <p align="center">
   <img src="https://raw.githubusercontent.com/olejardamir/Hertz/master/hertz-1ETH.png" width="500" title="Logo">
 </p>
 
-DEPLOYMENT ADDRESS:
-0x6a4b6316D1d03d2f2B3A0294502F8fAF0F38cA14
 
 
 ## Story behind, and a personal note ...
