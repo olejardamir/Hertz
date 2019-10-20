@@ -7,7 +7,7 @@
   <img src="https://raw.githubusercontent.com/olejardamir/Hertz/master/hertz-1ETH.png" width="500" title="Logo">
 </p>
 
-
+<br>
 
 ## Story behind, and a personal note ...
 While coding a project which is supposed to allow people to mine BTC model without any hardware, thinking about what I am doing and why, I tried to come up with a core explanation to all crypto-currencies and their market affairs. No matter how bad or good the project is, no matter what technology is applied, none of this matters as long as it can turn cents into dollars. It was a time to stop the coding and doing the complex things in vain, and simply follow the conclusion. What would happen if there were a stable-coin with a constantly increasing price ? If we can have stable-coins with a stable price relative to anything, then why not constantly increase that price ? what features must exist, and how would it work ? 
@@ -15,13 +15,7 @@ While coding a project which is supposed to allow people to mine BTC model witho
 All of these questions had some solution, however, it took a lot of thinking to come up with the best one.  As a great fan of a current fad called “deflationary coins”, I have noticed something awfully wrong with them... Although deflationary, their prices weren’t changing no matter how big or small the supply was. As a main developer of a project called ButtCoin (The Reaper, and Snayl), I have noticed one basic and simplest fact about people who are interested in the crypto-currencies... The truth is, majority of people simply want to make the money, and therefore good project is the one which helps them make the money. Furthermore, there is a very small amount of individuals who would contribute their hard efforts to any project, and for free. As a consequence, projects can gain the required publicity by depositing their investments, while at the end everyone ends-up losing to new technologies or the market manipulations.  It is just a matter of a time and a question of “when ?” the zero-sum (as in a game theory) kicks-in. Therefore, good projects are also the ones that simply prolong the inevitable destruction and a ruin (either financial or by the competing technologies). I have also seen great projects getting destroyed and burned to a ground with people losing their money in tears... 
 
 For this reason, I have decided to make this a solo-project, unrelated to any past projects I was working on, and create a coin that will never have the falling prices. It is a coin where everyone can profit at any time... It is a project with a minimal loss of 2% and where the community can benefit from any behaviour associated with the market manipulations. Whales, bots, and other creatures will never go away, so it would be great if we could simply make them join us at one point where we can all benefit from one-another. I took an idea from deflationary coins to burn tokens at each transfer, but also to create a micro-exchange and a storage of Ethereum within a contract. The result was very simple while the implications are huge. Furthermore, I have realized that the code I have made can be used with any ERC20 token, and Tethter is the one on my list, which will be run in a parallel with Hertz. A generalized source-code with instructions will be made so that anyone can take it and generate their own token in order to deflate any other token they want. We can even deflate deflationary tokens, including the Hertz !  However, this is a topic beyond the scope of this white-paper.
-
-## Stolen project, early stage
-While discussing Hertz online during a development, the eavesdroppers have done their task and created a poor copy of Hertz token. Please be aware of the other projects which claim to do the same thing as Hertz. If some project claims that they have borrowed Hertz code, please double-check their source-code to avoid getting scammed. It is extremely easy to turn this project into a ponzi-shceme. Furthermore, Check their source code history for any development, and you will see which one was gradually developed and which one was a copy-paste and a mockery. 
-
-### Ponzi schemes, and how this project is not one
-By definition: "A Ponzi scheme is a form of fraud that lures investors and pays profits to earlier investors with funds from more recent investors". In other words, ponzi-scheme is a pyramid where early investors are always on top. Be aware of the projects that collect Ethereum for the token owner addresses at investor's expense. Since this project ensures that you can always withdraw the Ethereum you deposited for a token purchase (with a necessary 2% fee to protect the token's mechanism), it means that you can enter this project at any time, and make the same gains by using and holding a token. Since the price is always increasing and funds spread across the accounts, nobody is at the greater advantage. Furthermore withdrawing the Ethereum does not affect the price of a token at all.
-
+ 
 ## How does it work ?
 The explanation is very simple. Imagine people putting money on one pile. Each time you want to take the money back, you have to leave 2% on the pile. Furthermore, each time you want to tell that someone else owns the money, you contribute 2% to a pile. The 2% that remain on a pile are shared with everyone since the Hertz token simply tells how much of a pile you own rather than how much of money you own. Therefore, nobody can lose more than 2% of what they put on a pile, while everyone profits together. This is how we can have a deflationary stable-coin where nobody loses and where everyone gains at all time.
 
@@ -56,6 +50,8 @@ The explanation is very simple. Imagine people putting money on one pile. Each t
 
 - A new deflationary token will be created by someone else to deflate Hertz once we reach 21000 tokens as a current supply... or once we start using too many zeros; since the prices may become too high on exchanges. Furthermore the bots could take the arbitrage as an advantage earning more than others can earn if there is a large gap between the contract price and a market price. This deflationary token, however, is not going to be made by Hertz (or me), while the general source-code will be available to everyone.
 
+- While discussing Hertz online during a development, the eavesdroppers have done their task and created a poor copy of a Hertz token. Please be aware of the other projects which claim to do the same thing as Hertz. Please double-check their source-code to avoid getting scammed. It is extremely easy to turn this project into a ponzi-shceme given the nature of it, and it is a matter of only a few lines of a code. Furthermore, Check their source code history for any development, and you will see which one was gradually developed and which one was a copy-paste and a mockery. 
+
 ## Source code review
 
 ### External functions
@@ -79,7 +75,7 @@ This is a helper function, used to separate the burning fee from a transfer. It 
 ``` js 
 function transfer(address to, uint tokens) public returns(bool success) { 
 ```
-A transfer function with a 2% fee. 2% of tokens get burned and a circulating supply reduced by the same amount of tokens. No zeto transfers are allowed. No burning allowed. No minting allowed. Checks if balance is greater or equal to tokens amount.
+A transfer function with a 2% fee. 2% of tokens get burned and a circulating supply reduced by the same amount of tokens. No zero transfers are allowed. No burning allowed. No minting allowed. Checks if balance is greater or equal to tokens amount.
 
 ``` js 
 function transferFrom(address from, address to, uint tokens) public returns(bool success) { 
@@ -153,4 +149,3 @@ Shows how much tokens you will get for the entered amount of wei, given the curr
 ```allowed``` a map
 
 ```constructorLocked``` true (after running a constructor)
-
