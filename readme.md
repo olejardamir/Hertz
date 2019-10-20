@@ -9,7 +9,7 @@
 
 <br>
 
-## Story behind, and a personal note ...
+## Story behind this project, Introduction, and a personal note ...
 While coding a project which is supposed to allow people to mine BTC model without any hardware, thinking about what I am doing and why, I tried to come up with a core explanation to all crypto-currencies and their market affairs. No matter how bad or good the project is, no matter what technology is applied, none of this matters as long as it can turn cents into dollars. It was a time to stop the coding and doing the complex things in vain, and simply follow the conclusion. What would happen if there were a stable-coin with a constantly increasing price ? If we can have stable-coins with a stable price relative to anything, then why not constantly increase that price ? what features must exist, and how would it work ? 
 
 All of these questions had some solution, however, it took a lot of thinking to come up with the best one.  As a great fan of a current fad called “deflationary coins”, I have noticed something awfully wrong with them... Although deflationary, their prices weren’t changing no matter how big or small the supply was. As a main developer of a project called ButtCoin (The Reaper, and Snayl), I have noticed one basic and simplest fact about people who are interested in the crypto-currencies... The truth is, majority of people simply want to make the money, and therefore good project is the one which helps them make the money. Furthermore, there is a very small amount of individuals who would contribute their hard efforts to any project, and for free. As a consequence, projects can gain the required publicity by depositing their investments, while at the end everyone ends-up losing to new technologies or the market manipulations.  It is just a matter of a time and a question of “when ?” the zero-sum (as in a game theory) kicks-in. Therefore, good projects are also the ones that simply prolong the inevitable destruction and a ruin (either financial or by the competing technologies). I have also seen great projects getting destroyed and burned to a ground with people losing their money in tears... 
@@ -19,6 +19,14 @@ For this reason, I have decided to make this a solo-project, unrelated to any pa
 ## How does it work ?
 The explanation is very simple. Imagine people putting money on one pile. Each time you want to take the money back, you have to leave 2% on the pile. Furthermore, each time you want to tell that someone else owns the money, you contribute 2% to a pile. The 2% that remain on a pile are shared with everyone since the Hertz token simply tells how much of a pile you own rather than how much of money you own. Therefore, nobody can lose more than 2% of what they put on a pile, while everyone profits together. This is how we can have a deflationary stable-coin where nobody loses and where everyone gains at all time.
 
+## Why should I purchase this token ?
+
+If you believe in a long-term holding of Ethereum, and if you can afford a 2% loss of your Ethereum, then you can use this token for the safe keeping with a high probability of getting more Ethereum than you have initially deposited. 
+
+## How to purchase from the contract 
+TODO...
+
+## Hod to get ETH back from the contract
 
 ## About
 - Pre-minted: 0
