@@ -39,8 +39,8 @@ A deflationary stable-coin, with a constantly increasing price.
  Total supply  :  21,000.0 (or 21 thousand tokens)
  Decimals      :  18
  Transfer Fees :  2% deducted from each transfer (a burning fee).
- Exchange Fees :  2% of tokens deducted while purchasing, 
-                  no fees while converting back to Ethereum
+ Exchange Fees :  no fees deducted while purchasing, 
+                  2% fee while converting back to Ethereum
  
 */
 
@@ -322,19 +322,19 @@ contract _HERTZ is ERC20Interface, Owned {
 // ----------------------------------------------------------------------------
 // This view function shows how much Wei will be obtained for your tokens.
 // - You must include decimals for an input.
-// - There is no fee for converting to Ethereum
+// - There is 2% fee for converting to Ethereum
 // ----------------------------------------------------------------------------
     function tokensToWei(uint tokens) public view returns(uint){
         if(tokens==0 || weiDeposited==0 || _currentSupply==0) return 0;
         uint ret = (weiDeposited.mul(tokens)).div(_currentSupply);
-        ret = ret.sub(ret.div(50)); //%2 fee, it stays to be shared with everyone
+        ret = ret.sub(ret.div(50)); //2% fee, it stays to be shared with everyone
         return ret;
     }
 
 // ------------------------------------------------------------------------
 // This is the function which allows us to purchase tokens from a contract
 // - Nobody collects Ethereum, it stays in a contract
-// - There is a 2% fee for purchasing Tokens
+// - There is a no fee for purchasing Tokens
 // ------------------------------------------------------------------------
     function purchaseTokens() external payable {
         require(msg.value>0);
