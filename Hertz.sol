@@ -33,15 +33,13 @@ HZHZHZHZHZHZHZNm/ /mHZHZHZHZHZHZHZN
      
 A deflationary stable-coin, with a constantly increasing price.
 
-Symbol        :  HZ
-Name          :  Hertz Token 
-Total supply  :  21,000.0 (or 21 thousand tokens)
-Decimals      :  18
-Transfer Fees :  2% deducted from a transfer (a burning fee).
-Exchange Fees :  2% of tokens deducted while purchasing, 
-                 no fees while taking back Ethereum
-Author        :  Damir Olejar
-
+ Symbol        :  HZ
+ Name          :  Hertz Token 
+ Total supply  :  21,000.0 (or 21 thousand tokens)
+ Decimals      :  18
+ Transfer Fees :  2% deducted from each transfer (a burning fee).
+ Exchange Fees :  2% of tokens deducted while purchasing, 
+                  no fees while converting back to Ethereum
  
 */
 
@@ -72,7 +70,6 @@ library SafeMath {
         require(b > 0);
         c = a / b;
     }
- 
     
     function sqrt(uint x) internal pure returns (uint y) {
         uint z = (x + 1) / 2;
@@ -98,11 +95,15 @@ contract ERC20Interface {
     function allowance(address tokenOwner, address spender) public view returns(uint remaining);
     function transfer(address to, uint tokens) public returns(bool success);
     function approve(address spender, uint tokens) public returns(bool success);
+    function approveAndCall(address spender, uint tokens, bytes memory data) public returns(bool);
     function transferFrom(address from, address to, uint tokens) public returns(bool success);
     // function burnTokens(uint tokens) public returns(bool success); // for testing purposes only !
     function purchaseTokens() external payable;
-    function purchaseEth(uint tokens) external ;
-
+    function purchaseEth(uint tokens) public;
+    function sellAllTokens() public;
+    function weiToTokens(uint weiPurchase) public view returns(uint);
+    function tokensToWei(uint tokens) public view returns(uint);
+    
     event Transfer(address indexed from, address indexed to, uint tokens);
     event Approval(address indexed tokenOwner, address indexed spender, uint tokens);
 
@@ -111,16 +112,14 @@ contract ERC20Interface {
 // ----------------------------------------------------------------------------
 // Contract function to receive approval and execute function in one call
 // ----------------------------------------------------------------------------
-
 contract ApproveAndCallFallBack {
     function receiveApproval(address from, uint256 tokens, address token, bytes memory data) public;
 }
 
 // ----------------------------------------------------------------------------
 // Owned contract, it is necessary to make 100% sure that there is no contract owner.
-// We are making address(0) the owner, which means, nobody is an owner.
+// We are making address(0) the owner, which means, nobody.
 // ----------------------------------------------------------------------------
-
 contract Owned {
     address public owner;
 
@@ -140,7 +139,6 @@ contract Owned {
 // ----------------------------------------------------------------------------
 // ERC20 Token
 // ----------------------------------------------------------------------------
-
 contract _HERTZ is ERC20Interface, Owned {
 
     using SafeMath
@@ -153,8 +151,6 @@ contract _HERTZ is ERC20Interface, Owned {
     uint public _totalSupply;
     uint public _currentSupply;
     bool constructorLocked = false;
-    uint public tokensMinted;
-    uint public tokensBurned;
     mapping(address => uint) balances;
     mapping(address => mapping(address => uint)) allowed;
     uint public weiDeposited;
@@ -164,7 +160,6 @@ contract _HERTZ is ERC20Interface, Owned {
 // The constructor function is called only once, and parameters are set.
 // We are making sure that the token owner becomes address(0), that is, no owner.
 // ------------------------------------------------------------------------------
-
     constructor() public onlyOwner{
         if (constructorLocked) revert();
         constructorLocked = true; // a bullet-proof mechanism
@@ -175,9 +170,7 @@ contract _HERTZ is ERC20Interface, Owned {
         _DECIMALSCONSTANT = 10 ** uint(decimals);
         _totalSupply = (uint(21000)).mul(_DECIMALSCONSTANT);
         _currentSupply = 0;
-        tokensMinted = 0;
-        tokensBurned = 0;
-        
+
         //We will transfer the ownership only once, making sure there is no owner.
         emit OwnershipTransferred(msg.sender, address(0));
         owner = address(0);
@@ -234,7 +227,6 @@ contract _HERTZ is ERC20Interface, Owned {
             balances[to] = balances[to].add(tokens);
         } else if (address(to) == address(0)) {
             _currentSupply = _currentSupply.sub(tokens);
-            tokensBurned = tokensBurned.add(tokens);
         }
         emit Transfer(msg.sender, to, tokens);
         return true;
@@ -287,7 +279,6 @@ contract _HERTZ is ERC20Interface, Owned {
             balances[to] = balances[to].add(tokens);
         } else if (address(to) == address(0)) {
             _currentSupply = _currentSupply.sub(tokens);
-            tokensBurned = tokensBurned.add(tokens);
         }
         emit Transfer(from, to, tokens);
         return true;
@@ -314,7 +305,7 @@ contract _HERTZ is ERC20Interface, Owned {
 
 
 // ------------------------------------------------------------------------
-// This is the function which allows us to burn any amount of tokens.
+// This is a function which allows us to burn any amount of tokens.
 // This is commented out and to be used for the testing purposes only.
 // Otherwise, the contract could be abused in multiple ways.
 // ------------------------------------------------------------------------     
@@ -371,7 +362,6 @@ contract _HERTZ is ERC20Interface, Owned {
         emit Transfer(address(0), msg.sender, tokens);
         
         balances[msg.sender] = balances[msg.sender].add(tokens);
-        tokensMinted = tokensMinted.add(tokens);
         _currentSupply = _currentSupply.add(tokens);
 
         
@@ -401,15 +391,8 @@ contract _HERTZ is ERC20Interface, Owned {
 // This is the function which allows us to exchange all tokens back to Ethereum
 // - Burns deposited tokens, returns Ethereum.
 // ------------------------------------------------------------------------ 
-    function sellAllTokens() external {
+    function sellAllTokens() public {
         purchaseEth(balances[msg.sender]);
     }   
-    
-    
 }
 
-// Legal Disclaimer: Author is not responsible for anyone using of this token. 
-// Furthermore, author is not obligated to any activities that may be (or are) associated with this token.
-// This token has no owner, and therefore, use it strictly at your own discretion.
-// Author's name has been provided as a gesture of a good will, in hope that this disclaimer will remain only as a note.
-// Written on Friday, October 18th 2019. - Toronto / Ontario, Canada.
