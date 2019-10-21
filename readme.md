@@ -61,6 +61,13 @@ Use the fields tokensToWei (to see how much wei you will get) or weiToTokens (to
 - Minimum purchase: 0.000000000000000001
 - Maximum purchase: Total Supply minus Current Supply
 
+## Web-pages and the social media
+Official Website: under development
+Twitter: https://twitter.com/HertzToken
+Telegram: https://t.co/E6Z0FmvoGr?amp=1
+Discord: under development
+LinkedIn: under development
+Reddit: under development
 
 ## Performance and expectations
  
