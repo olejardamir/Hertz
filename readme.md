@@ -69,6 +69,7 @@ Use the fields tokensToWei (to see how much wei you will get) or weiToTokens (to
 - LinkedIn: under development
 - Reddit: under development
 - Instagram: under development
+- BitcoinTalk: https://bitcointalk.org/index.php?topic=5194544.msg52823593#msg52823593
 
 ## Performance and expectations
  
