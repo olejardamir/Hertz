@@ -41,7 +41,13 @@ To purchase directly from a contract, there are a few steps involved.
 ## How to get ETH back from the contract
 The procedure is the same as the "How to purchase from the contract" explained above. However, instead of pressing the write button under "purchaseTokens", you can use the sellAllTokens to exchange all HZ you got.  If you want to specify the amount of HZ, use the "purchaseEth" field and remember to type in 18 decimals too (there is no decimal point).
 
-## About
+
+## How to see the conversion values
+Go to https://etherscan.io/address/0x6a4b6316d1d03d2f2b3a0294502f8faf0f38ca14#readContract
+Use the fields tokensToWei (to see how much wei you will get) or weiToTokens (to see how many tokens you will get for your deposited wei). Keep in mind, both Ethereum and HZ have 18 decimals and results will be displayed without those decimals. You can use any online Wei to Ethereum calculator such as http://eth-converter.com/
+
+
+## About Token
 - Pre-minted: 0
 - Contract owner: nobody, meaning, nobody collects Ethereum.
 - Decimals: 18. Since token price will always increase, zeros will become very important.
