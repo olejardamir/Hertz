@@ -21,6 +21,9 @@ For this reason, I have decided to make this a solo-project, unrelated to any pa
 ## How does it work ?
 The explanation is very simple. Imagine people putting money on one pile. Each time someone wants to take the money back or send it to someone else, they have to leave 2% of that amount on the pile. The 2% that remain on a pile are shared with everyone since the Hertz token simply tells how much of a pile you own rather than how much of money you got. Therefore, nobody can lose more than 2% of what they put on a pile, while everyone profits together from the money-flow. This is how we can have a deflationary stable-coin where nobody loses and where everyone always gains.
 
+## How is it a stable-coin ?
+It is a stable-coin in comparison to Ethereum. USD as well as BTC is in progress using the same mechanism.
+
 ## Why should I purchase this token ?
 If you believe in a long-term holding of Ethereum, and if you can afford a 2% loss of your Ethereum, then you can use this token for the safe keeping with a high probability of getting more Ethereum than you have initially deposited. 
 
