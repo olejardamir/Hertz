@@ -341,6 +341,7 @@ contract _HERTZ is ERC20Interface, Owned {
         require(deposit>0);
         
         //This must be approved with the original contract
+        //The original contract MUST have balanceOf function !
         uint actualDepositAmount = token.balanceOf(address(this));
         token.transferFrom(msg.sender, address(this), deposit);
         actualDepositAmount = (token.balanceOf(address(this))).sub(actualDepositAmount);
