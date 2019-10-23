@@ -6,6 +6,8 @@
 
 
 <p align="center">
+  
+  <img src="https://raw.githubusercontent.com/olejardamir/Hertz/master/mainWebPage/img/letters.png" width="500" title="Letters">
   <img src="https://raw.githubusercontent.com/olejardamir/Hertz/master/hertz-1ETH.png" width="500" title="Logo">
 </p>
 
