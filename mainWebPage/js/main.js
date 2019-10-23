@@ -5,7 +5,7 @@
 
 			const detailsTmpl = `
 			<div class="details__bg details__bg--down">
-				<button class="details__close"><i class="fas fa-2x fa-times icon--cross tm-fa-close"></i></button>
+				<button class="details__close"><i class="fas fa-1x fa-times icon--cross fa-window-minimize"></i></button>
 				<div class="details__description"></div>
 			</div>						
 			`;
