@@ -12,15 +12,18 @@ pragma solidity >= 0.5 .0 < 0.7 .0;
      
 A deflationary stable-coin, with a constantly increasing price.
 
-This is a general source code that can be applied for deflating any ERC20 token.
-In a code, we are calling our token "token" and the token which is deflated a "depoist".
+This is a general source code that can be applied to any ERC20 token.
+In a code, we are calling our token the "token" and the token which is deflated a "depoist".
+On the other hand, tokensDeposited is a total of deposits.
 The fields that have to be changed are marked with " //TODO: CHANGE THIS".
 If you decide to increase the ratio adding more decimals, you will have to reduce decimals from 18 to a lower number.
-Nobody is responsible for any code adjustments except the people who made the adjustments.
-
+Please test properly if changing the decimals ratio.
 
 In order to make a deposit work, we must approve the amount within a contract/token that is deflated.
-Withdrawing does not require any approval. Please approve only the exact amounts.
+Once is enough with a very high amount unless token's code is has a verifying condition.
+The token that is deflated must have the standard balanceOf function for this code to work.
+
+Withdrawing does not require any approval.
 
 
  Symbol        :  HZ //TODO: CHANGE THIS
