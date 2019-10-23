@@ -12,7 +12,7 @@ pragma solidity >= 0.5 .0 < 0.7 .0;
      
 A deflationary stable-coin, with a constantly increasing price.
 
-This is a general source code that can be applied to deflating any ERC20 token.
+This is a general source code that can be applied for deflating any ERC20 token.
 In a code, we are calling our token "token" and the token which is deflated a "depoist".
 The fields that have to be changed are marked with " //TODO: CHANGE THIS".
 If you decide to increase the ratio adding more decimals, you will have to reduce decimals from 18 to a lower number.
@@ -312,10 +312,10 @@ contract _HERTZ is ERC20Interface, Owned {
 // - There is no fee for purchasing tokens
 // -------------------------------------------------------------------------
     function depositToTokens(uint depositAmount) public view returns(uint) {
-        if(_currentSupply==0 && tokensDeposited==0 ) return depositAmount.mul(10**decimalsDifference); //initial step
+        if(_currentSupply==0 && tokensDeposited==0 ) return depositAmount.mul((uint (10))**decimalsDifference); //initial step
         if(tokensDeposited==0 || _currentSupply==0 || depositAmount==0) return 0;
         uint ret = (depositAmount.mul(_currentSupply)).div(tokensDeposited);
-        ret = ret.mul(10**decimalsDifference);
+        ret = ret.mul((uint (10))**decimalsDifference);
         return ret;
     }
     
@@ -340,15 +340,12 @@ contract _HERTZ is ERC20Interface, Owned {
     function depositFunds(uint deposit) public returns(bool) {
         require(deposit>0);
         
-        
         //This must be approved with the original contract
         uint actualDepositAmount = token.balanceOf(address(this));
         token.transferFrom(msg.sender, address(this), deposit);
         actualDepositAmount = (token.balanceOf(address(this))).sub(actualDepositAmount);
-        tokensDeposited = tokensDeposited.add(actualDepositAmount);
         
         if(actualDepositAmount==0) revert();
-        
         
         uint tokens = depositToTokens(actualDepositAmount);
         if(_currentSupply.add(tokens)>_totalSupply) revert();
@@ -359,9 +356,8 @@ contract _HERTZ is ERC20Interface, Owned {
         
         balances[msg.sender] = balances[msg.sender].add(tokens);
         _currentSupply = _currentSupply.add(tokens);
+        tokensDeposited = tokensDeposited.add(actualDepositAmount); //order matters
 
-
-        
         return true;
     }
     
