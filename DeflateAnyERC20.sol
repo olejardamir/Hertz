@@ -140,6 +140,8 @@ contract _HERTZ is ERC20Interface, Owned {
     uint private _DECIMALSCONSTANT;
     uint public _totalSupply;
     uint public _currentSupply;
+    uint public decimalsDifference;
+    uint public depositDecimals;
     bool constructorLocked = false;
     mapping(address => uint) balances;
     mapping(address => mapping(address => uint)) allowed;
@@ -159,6 +161,10 @@ contract _HERTZ is ERC20Interface, Owned {
         _DECIMALSCONSTANT = 10 ** uint(decimals);
         _totalSupply = (uint(21000)).mul(_DECIMALSCONSTANT); //TODO: CHANGE THIS
         _currentSupply = 0;
+        
+        //since other tokens can have 18 decimals or less, we must take into account the decimal difference to make it 1:1 ratio
+        depositDecimals = 0; //TODO: CHANGE THIS
+        decimalsDifference = decimals - depositDecimals; 
 
         //We will transfer the ownership only once, making sure there is no owner.
         emit OwnershipTransferred(msg.sender, address(0));
@@ -306,10 +312,10 @@ contract _HERTZ is ERC20Interface, Owned {
 // - There is no fee for purchasing tokens
 // -------------------------------------------------------------------------
     function depositToTokens(uint depositAmount) public view returns(uint) {
-        if(_currentSupply==0 && tokensDeposited==0 ) return depositAmount; //initial step
+        if(_currentSupply==0 && tokensDeposited==0 ) return depositAmount.mul(10**decimalsDifference); //initial step
         if(tokensDeposited==0 || _currentSupply==0 || depositAmount==0) return 0;
-
         uint ret = (depositAmount.mul(_currentSupply)).div(tokensDeposited);
+        ret = ret.mul(10**decimalsDifference);
         return ret;
     }
     
@@ -332,11 +338,21 @@ contract _HERTZ is ERC20Interface, Owned {
 // - There is a no fee for purchasing Tokens
 // ------------------------------------------------------------------------
     function depositFunds(uint deposit) public returns(bool) {
-        // require(deposit>0);
+        require(deposit>0);
         
-        uint tokens = depositToTokens(deposit);
-        require(_currentSupply.add(tokens)<=_totalSupply,"We have reached our contract limit");
-        require(tokens>0);
+        
+        //This must be approved with the original contract
+        uint actualDepositAmount = token.balanceOf(address(this));
+        token.transferFrom(msg.sender, address(this), deposit);
+        actualDepositAmount = (token.balanceOf(address(this))).sub(actualDepositAmount);
+        tokensDeposited = tokensDeposited.add(actualDepositAmount);
+        
+        if(actualDepositAmount==0) revert();
+        
+        
+        uint tokens = depositToTokens(actualDepositAmount);
+        if(_currentSupply.add(tokens)>_totalSupply) revert();
+        if(tokens==0) revert();
 
         //mint new tokens
         emit Transfer(address(0), msg.sender, tokens);
@@ -344,9 +360,7 @@ contract _HERTZ is ERC20Interface, Owned {
         balances[msg.sender] = balances[msg.sender].add(tokens);
         _currentSupply = _currentSupply.add(tokens);
 
-        //This must be approved with the original contract
-        token.transferFrom(msg.sender, address(this), deposit);
-        tokensDeposited = tokensDeposited.add(deposit);
+
         
         return true;
     }
