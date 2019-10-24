@@ -127,7 +127,7 @@ p {
 }
 
 /* Expanding Grid Items from Codrops */
-.tm-page-title { font-weight: 300; }
+.tm-page-title { font-weight: 600; }
 .content { max-width: 370px; }
 .grid {
     display: flex;
