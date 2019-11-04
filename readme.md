@@ -67,14 +67,9 @@ Use the fields tokensToWei (to see how much wei you will get) or weiToTokens (to
 - Maximum purchase: Total Supply minus Current Supply
 
 ## Web-pages and the social media
-- Official Website: under development
+- Official Website: www.gotohertz.com
 - Twitter: https://twitter.com/HertzToken
 - Telegram: https://t.co/E6Z0FmvoGr?amp=1
-- Discord: under development
-- LinkedIn: under development
-- Reddit: under development
-- Instagram: under development
-- BitcoinTalk: https://bitcointalk.org/index.php?topic=5194544.msg52823593#msg52823593
 
 ## Performance and expectations
  
@@ -180,7 +175,7 @@ Shows how much tokens you will get for the entered amount of wei, given the curr
 
 ```_currentSupply``` 0 (initiated)
 
-```_DECIMALSCONSTANT``` 18
+```_DECIMALSCONSTANT``` 10^18
 
 ```weiDeposited``` 0 (initiated)
 
