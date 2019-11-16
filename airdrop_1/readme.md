@@ -11,7 +11,12 @@
 </p>
 <p align="center">The stable-coin, always increasing in value.</p>
 
- 
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/olejardamir/Hertz/master/airdrop_1/AIRDROP.gif" width="500" title="Letters">  
+</p>
+
+
 
 ## Where can I get more HZ tokens ?
 Please go to a main webpage (https://gotohertz.com/index.html), click on DApps and select the Dapp from a popup window. Everything should be self-explanatory. The connection may be slow for some users, so please be patient for servers to give you the access to DApp deployed to Heroku.com servers. 
