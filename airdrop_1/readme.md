@@ -59,3 +59,4 @@ You will need a browser wallet such as Metamask and some Ethereum on your accoun
 - Twitter: https://twitter.com/HertzToken
 - Instagram: https://www.instagram.com/hertztoken/
 - Telegram: https://t.me/joinchat/Ote9nhcPmwqf4Kmh3Fh6Uw
+- Discord: https://discordapp.com/invite/KGwkqqM
