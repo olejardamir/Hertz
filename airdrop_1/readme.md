@@ -9,7 +9,7 @@
 </p>
 
 ## Where can I get more HZ tokens ?
-Please go to a main webpage (https://gotohertz.com/index.html), click on DApps and select the Dapp from a popup window. Everything should be self-explanatory. You will need a browser wallet such as Metamask and some Ethereum on your account to purchase HZ. Please note, HZ token has no owner and everything is decentralized. You are the owner of your tokens! Furthermore, you can exchange them back to Ethereum any time.
+Please go to a main webpage (https://gotohertz.com/index.html), click on DApps and select the Dapp from a popup window. Everything should be self-explanatory. You will need a browser wallet such as Metamask and some Ethereum on your account to purchase HZ. Please note, HZ token has no owner and everything is decentralized. You are the owner of your tokens! Furthermore, you can exchange them back to Ethereum any time, using the same DApp.
 
 
 ## Airdrop rules
@@ -23,9 +23,17 @@ Please go to a main webpage (https://gotohertz.com/index.html), click on DApps a
 
 5. Please note, the price of 1 HZ token is currently about 1 HZ token (and slightly higher).
 
+6. People who already added Hertz to Instagram can still participate. Instagram adding will be taken into account.
+
 
 ## How to apply
-- Option 1: Twitter + Telegram (1 point). Add to Twitter, repost on Twitter and join the telegram group
+- Option 1: Twitter + Telegram (1 point). Add to Twitter, repost on Twitter and join the Telegram group. Send a private message on twitter stating your ETH address and your Telegram username.
+
+-Option 2: Twitter + Telegram + Discord (2 points) Add to Twitter, repost on Twitter and join the Telegram as well as the Discord group. Send a private message on twitter stating your ETH address, your Telegram as well as your Discord username.
+
+-Option 3: Twitter + Discord (1 point)  Add to Twitter, repost on Twitter and join the Discord group. Send a private message on twitter stating your ETH address and your Discord username.
+
+-Option 4: Twitter + Discord + Telegram + Instagram (5 points) Add to Twitter, repost on Twitter and join the Discord, Telegram and Instagram. Send a private message on twitter stating your ETH address and your Instagram, Discord, and Telegram username.
 
 
 
