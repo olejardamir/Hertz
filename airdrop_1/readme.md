@@ -1,5 +1,5 @@
 
-<p align="center" style="font-size:30px;">HERTZ AIRDROP</p>
+<p align="center" style="font-size: 30px;">HERTZ AIRDROP</p>
 
 
 <p align="center">
