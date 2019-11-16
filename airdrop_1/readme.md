@@ -1,4 +1,5 @@
 
+<p align="center">HERTZ AIRDROP</p>
 
 
 <p align="center">
@@ -8,8 +9,8 @@
 <p align="center">
   <img src="https://raw.githubusercontent.com/olejardamir/Hertz/master/mainWebPage/img/letters.png" width="500" title="Letters">  
 </p>
-<p align="center">HERTZ AIRDROP</p>
 <p align="center">The stable-coin always increasing in value.</p>
+
  
 
 ## Where can I get more HZ tokens ?
