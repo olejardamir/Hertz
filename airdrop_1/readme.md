@@ -14,7 +14,11 @@
  
 
 ## Where can I get more HZ tokens ?
-Please go to a main webpage (https://gotohertz.com/index.html), click on DApps and select the Dapp from a popup window. Everything should be self-explanatory. The connection may be slow for some users, so please be patient for servers to give you the access to DApp deployed to Heroku.com servers. You will need a browser wallet such as Metamask and some Ethereum on your account to purchase HZ. Please note, HZ token has no owner and everything is decentralized. You are the owner of your tokens! Furthermore, you can exchange them back to Ethereum any time, using the same DApp.
+Please go to a main webpage (https://gotohertz.com/index.html), click on DApps and select the Dapp from a popup window. Everything should be self-explanatory. The connection may be slow for some users, so please be patient for servers to give you the access to DApp deployed to Heroku.com servers. 
+
+First, click on the "CLICK HERE TO ADD HERTZ TO METAMASK". Then, click on "GO TO HERTZ DAPP FOR TOKEN EXCHANGE".
+
+You will need a browser wallet such as Metamask and some Ethereum on your account to purchase HZ. Please note, HZ token has no owner and everything is decentralized. You are the owner of your tokens! Furthermore, you can exchange them back to Ethereum any time, using the same DApp.
 
 
 ## Airdrop rules
