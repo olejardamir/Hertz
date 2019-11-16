@@ -3,7 +3,7 @@
 
 
 <p align="center">
-  <img src="http://gotohertz.com/img/underline.png" width="200">  
+  <img src="http://gotohertz.com/img/underline.png" width="100">  
 </p>
 
 <p align="center">
