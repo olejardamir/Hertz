@@ -12,5 +12,9 @@
 
 <br>
 
-## Story behind this project, Introduction, and a personal note ...
+## Airdrop rules
+1. Your twitter account must have a profile image and an activity for more than 2 weeks.
+
+2. Your discord as well as the telegram account must have a profile image.
+
  
