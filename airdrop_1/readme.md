@@ -5,7 +5,7 @@
 
 
 <p align="center">
-  <img src="https://gotohertz.com/img/underline.png" width="500" title="Letters">  
+  <img src="http://gotohertz.com/img/underline.png" width="500">  
 </p>
 <p align="center">
   <img src="https://raw.githubusercontent.com/olejardamir/Hertz/master/mainWebPage/img/letters.png" width="500" title="Letters">  
