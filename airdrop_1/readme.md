@@ -31,7 +31,7 @@ You will need a browser wallet such as Metamask and some Ethereum on your accoun
 
 2. Your discord, instagram as well as a telegram account must have a profile image.
 
-3. You must add Hertz properly and send the ETH address as requested.
+3. You must add Hertz properly to relevant social media, and send the ETH address as requested.
 
 4. The "point" simply tells you how many tokens you will get. It is the minimum token number multiplied by points. For example, if minimum is 0.001 HZ and number of points for a task is 3, you will get 0.003 HZ tokens.
 
