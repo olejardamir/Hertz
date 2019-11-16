@@ -25,15 +25,17 @@ Please go to a main webpage (https://gotohertz.com/index.html), click on DApps a
 
 6. People who already added Hertz to Instagram can still participate. Instagram adding will be taken into account.
 
+7. The amount of airdropped tokens will be decided after the data is collected and will be announced.
+
 
 ## How to apply
 - Option 1: Twitter + Telegram (1 point). Add to Twitter, repost on Twitter and join the Telegram group. Send a private message on twitter stating your ETH address and your Telegram username.
 
--Option 2: Twitter + Telegram + Discord (2 points) Add to Twitter, repost on Twitter and join the Telegram as well as the Discord group. Send a private message on twitter stating your ETH address, your Telegram as well as your Discord username.
+- Option 2: Twitter + Telegram + Discord (2 points) Add to Twitter, repost on Twitter and join the Telegram as well as the Discord group. Send a private message on twitter stating your ETH address, your Telegram as well as your Discord username.
 
--Option 3: Twitter + Discord (1 point)  Add to Twitter, repost on Twitter and join the Discord group. Send a private message on twitter stating your ETH address and your Discord username.
+- Option 3: Twitter + Discord (1 point)  Add to Twitter, repost on Twitter and join the Discord group. Send a private message on twitter stating your ETH address and your Discord username.
 
--Option 4: Twitter + Discord + Telegram + Instagram (5 points) Add to Twitter, repost on Twitter and join the Discord, Telegram and Instagram. Send a private message on twitter stating your ETH address and your Instagram, Discord, and Telegram username.
+- Option 4: Twitter + Discord + Telegram + Instagram (5 points) Add to Twitter, repost on Twitter and join the Discord, Telegram and Instagram. Send a private message on twitter stating your ETH address and your Instagram, Discord, and Telegram username.
 
 
 
