@@ -1,7 +1,4 @@
 
-<p align="center">HERTZ AIRDROP</p>
-<p align="center">0x6a4b6316D1d03d2f2B3A0294502F8fAF0F38cA14</p>
- 
 
 
 <p align="center">
@@ -11,6 +8,9 @@
 <p align="center">
   <img src="https://raw.githubusercontent.com/olejardamir/Hertz/master/mainWebPage/img/letters.png" width="500" title="Letters">  
 </p>
+<p align="center">HERTZ AIRDROP</p>
+<p align="center">0x6a4b6316D1d03d2f2B3A0294502F8fAF0F38cA14</p>
+ 
 
 ## Where can I get more HZ tokens ?
 Please go to a main webpage (https://gotohertz.com/index.html), click on DApps and select the Dapp from a popup window. Everything should be self-explanatory. You will need a browser wallet such as Metamask and some Ethereum on your account to purchase HZ. Please note, HZ token has no owner and everything is decentralized. You are the owner of your tokens! Furthermore, you can exchange them back to Ethereum any time, using the same DApp.
