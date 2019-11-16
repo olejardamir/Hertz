@@ -28,7 +28,7 @@ You will need a browser wallet such as Metamask and some Ethereum on your accoun
 
 3. You must add Hertz properly and send the ETH address as requested.
 
-4. Point simply tells you how many tokens you will get. It is the minimum point number multiplied by points. For example, if minimum is 0.001 HZ and number of points for a task is 3, you will get 0.003 HZ tokens.
+4. The "point" simply tells you how many tokens you will get. It is the minimum token number multiplied by points. For example, if minimum is 0.001 HZ and number of points for a task is 3, you will get 0.003 HZ tokens.
 
 5. Please note, the price of 1 HZ token is currently about 1 HZ token (and slightly higher).
 
