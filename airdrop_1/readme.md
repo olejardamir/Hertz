@@ -8,7 +8,7 @@
 <p align="center">
   <img src="https://raw.githubusercontent.com/olejardamir/Hertz/master/mainWebPage/img/letters.png" width="500" title="Letters">  
 </p>
-<p align="center" style="font-size: 30px;">AIRDROP</p>
+<p align="center" style="font-size: 30px;">AIRDROP BOUNTY</p>
 
 <p align="center">The stable-coin, always increasing in value.</p>
 
