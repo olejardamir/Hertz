@@ -17,14 +17,17 @@
   <img src="https://raw.githubusercontent.com/olejardamir/Hertz/master/airdrop_1/AIRDROP.gif" width="500" title="Letters">  
 </p>
 
+## How to apply
 
+- Option 1 (1 point): Twitter + Telegram - Follow on Twitter, Re-tweet and join the Telegram group. Send a private message on Twitter stating your ETH address and your Telegram username.
 
-## Where can I get more HZ tokens ?
-Please go to a main webpage (https://gotohertz.com/index.html), click on DApps and select the Dapp from a popup window. Everything should be self-explanatory. The connection may be slow for some users, so please be patient for servers to give you the access to DApp deployed to Heroku.com servers. 
+- Option 2 (2 points): Twitter + Telegram + Discord - Folow to Twitter, Re-tweet and join the Telegram as well as the Discord group. Send a private message on Twitter stating your ETH address, your Telegram as well as your Discord username.
 
-First, click on the "CLICK HERE TO ADD HERTZ TO METAMASK". Then, click on "GO TO HERTZ DAPP FOR TOKEN EXCHANGE".
+- Option 3  (1 point) Twitter + Discord -  Follow on Twitter, Re-tweet and join the Discord group. Send a private message on Twitter stating your ETH address and your Discord username.
 
-You will need a browser wallet such as Metamask and some Ethereum on your account to purchase HZ. Please note, HZ token has no owner and everything is decentralized. You are the owner of your tokens! Furthermore, you can exchange them back to Ethereum any time, using the same DApp.
+- Option 4 (5 points) - Twitter + Discord + Telegram + Instagram (5 points) Follow on Twitter, Re-tweet and join the Discord, Telegram and Instagram. Send a private message on Twitter stating your ETH address and your Instagram, Discord, and Telegram username.
+
+- Option 5  (2 point) Twitter + Instagram -  Follow on Twitter, Re-tweet and join the Instagram group. Send a private message on Twitter stating your ETH address and your Instagram username.
 
 
 ## Airdrop rules
@@ -42,17 +45,17 @@ You will need a browser wallet such as Metamask and some Ethereum on your accoun
 
 
 
-## How to apply
 
-- Option 1 (1 point): Twitter + Telegram - Follow on Twitter, Re-tweet and join the Telegram group. Send a private message on Twitter stating your ETH address and your Telegram username.
 
-- Option 2 (2 points): Twitter + Telegram + Discord - Folow to Twitter, Re-tweet and join the Telegram as well as the Discord group. Send a private message on Twitter stating your ETH address, your Telegram as well as your Discord username.
 
-- Option 3  (1 point) Twitter + Discord -  Follow on Twitter, Re-tweet and join the Discord group. Send a private message on Twitter stating your ETH address and your Discord username.
+## Where can I get more HZ tokens ?
+Please go to a main webpage (https://gotohertz.com/index.html), click on DApps and select the Dapp from a popup window. Everything should be self-explanatory. The connection may be slow for some users, so please be patient for servers to give you the access to DApp deployed to Heroku.com servers. 
 
-- Option 4 (5 points) - Twitter + Discord + Telegram + Instagram (5 points) Follow on Twitter, Re-tweet and join the Discord, Telegram and Instagram. Send a private message on Twitter stating your ETH address and your Instagram, Discord, and Telegram username.
+First, click on the "CLICK HERE TO ADD HERTZ TO METAMASK". Then, click on "GO TO HERTZ DAPP FOR TOKEN EXCHANGE".
 
-- Option 5  (2 point) Twitter + Instagram -  Follow on Twitter, Re-tweet and join the Instagram group. Send a private message on Twitter stating your ETH address and your Instagram username.
+You will need a browser wallet such as Metamask and some Ethereum on your account to purchase HZ. Please note, HZ token has no owner and everything is decentralized. You are the owner of your tokens! Furthermore, you can exchange them back to Ethereum any time, using the same DApp.
+
+
 
 
 
