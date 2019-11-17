@@ -48,9 +48,11 @@ You will need a browser wallet such as Metamask and some Ethereum on your accoun
 
 - Option 2 (2 points): Twitter + Telegram + Discord - Folow to Twitter, Re-tweet and join the Telegram as well as the Discord group. Send a private message on Twitter stating your ETH address, your Telegram as well as your Discord username.
 
-- Option 3  (1 point) witter + Discord -  Follow on Twitter, Re-tweet and join the Discord group. Send a private message on Twitter stating your ETH address and your Discord username.
+- Option 3  (1 point) Twitter + Discord -  Follow on Twitter, Re-tweet and join the Discord group. Send a private message on Twitter stating your ETH address and your Discord username.
 
 - Option 4 (5 points) - Twitter + Discord + Telegram + Instagram (5 points) Follow on Twitter, Re-tweet and join the Discord, Telegram and Instagram. Send a private message on Twitter stating your ETH address and your Instagram, Discord, and Telegram username.
+
+- Option 5  (2 point) Twitter + Instagram -  Follow on Twitter, Re-tweet and join the Instagram group. Send a private message on Twitter stating your ETH address and your Instagram username.
 
 
 
