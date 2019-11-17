@@ -27,7 +27,7 @@
 
 - Option 4 (5 points) - Twitter + Discord + Telegram + Instagram (5 points) Follow on Twitter, Re-tweet and join the Discord, Telegram and Instagram. Send a private message on Twitter stating your ETH address and your Instagram, Discord, and Telegram username.
 
-- Option 5  (2 point) Twitter + Instagram -  Follow on Twitter, Re-tweet and join the Instagram group. Send a private message on Twitter stating your ETH address and your Instagram username.
+- Option 5  (2 points) Twitter + Instagram -  Follow on Twitter, Re-tweet and join the Instagram group. Send a private message on Twitter stating your ETH address and your Instagram username.
 
 
 ## Airdrop rules
