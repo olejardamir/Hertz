@@ -37,9 +37,8 @@ You will need a browser wallet such as Metamask and some Ethereum on your accoun
 
 5. Please note, the price of 1 HZ token is currently about 1 HZ token (and slightly higher).
 
-6. People who already added Hertz to Instagram can still participate. Instagram adding will be taken into account.
+6. People who already added Hertz to Instagram can still participate.
 
-7. The amount of airdropped tokens will be decided after the data is collected and will be announced.
 
 
 ## How to apply
