@@ -17,6 +17,9 @@
   <img src="https://raw.githubusercontent.com/olejardamir/Hertz/master/airdrop_1/AIRDROP.gif" width="500" title="Letters">  
 </p>
 
+## To follow and re-tweet:
+https://twitter.com/HertzToken/status/1195762706541875200
+
 ## How to apply
 
 - Option 1 (1 point): Twitter + Telegram - Follow on Twitter, Re-tweet and join the Telegram group. Send a private message on Twitter stating your ETH address and your Telegram username.
