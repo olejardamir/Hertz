@@ -17,7 +17,7 @@
   <img src="https://raw.githubusercontent.com/olejardamir/Hertz/master/airdrop_1/AIRDROP.gif" width="500" title="Letters">  
 </p>
 
-## To follow and re-tweet:
+### To follow and re-tweet, use this link:
 https://twitter.com/HertzToken/status/1195762706541875200
 
 ## How to apply
