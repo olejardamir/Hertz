@@ -35,7 +35,7 @@ Withdrawing does not require any approval.
                   2% fee while converting back to deposits
                   
 TODO: the send must calculate the reduction first, send the exact amount and then reduce, since some exchanges don't allow the current algorithm.
-
+TODO: adjust the total supply to be equal to a current supply so that exchanges can get their 10% cheap
 */
 
 // ----------------------------------------------------------------------------
