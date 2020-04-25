@@ -2,6 +2,7 @@ pragma solidity >= 0.5 .0 < 0.7 .0;
 
 /*
 
+TODO: the send must calculate the reduction first, send the exact amount and then reduce, since some exchanges don't allow the current algorithm.
 
  _    ____________________________
 | |  |   ____   __  __   ______  /
