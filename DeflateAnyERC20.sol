@@ -2,7 +2,6 @@ pragma solidity >= 0.5 .0 < 0.7 .0;
 
 /*
 
-TODO: the send must calculate the reduction first, send the exact amount and then reduce, since some exchanges don't allow the current algorithm.
 
  _    ____________________________
 | |  |   ____   __  __   ______  /
@@ -34,6 +33,9 @@ Withdrawing does not require any approval.
  Transfer Fees :  2% deducted from each transfer (a burning fee).
  Exchange Fees :  no fees deducted while purchasing, 
                   2% fee while converting back to deposits
+                  
+TODO: the send must calculate the reduction first, send the exact amount and then reduce, since some exchanges don't allow the current algorithm.
+
 */
 
 // ----------------------------------------------------------------------------
