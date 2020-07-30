@@ -1,4 +1,7 @@
-pragma solidity >= 0.5 .0 < 0.7 .0;
+// SPDX-License-Identifier: MIT
+
+pragma solidity >= 0.5 .0 < 0.8 .0;
+
 
 /*
 +-----------------------------------+
@@ -85,21 +88,21 @@ library SafeMath {
 // ERC Token Standard
 // ----------------------------------------------------------------------------
 
-contract ERC20Interface {
+abstract contract  ERC20Interface {
 
-    function totalSupply() public view returns(uint);
-    function balanceOf(address tokenOwner) public view returns(uint balance);
-    function allowance(address tokenOwner, address spender) public view returns(uint remaining);
-    function transfer(address to, uint tokens) public returns(bool success);
-    function approve(address spender, uint tokens) public returns(bool success);
-    function approveAndCall(address spender, uint tokens, bytes memory data) public returns(bool);
-    function transferFrom(address from, address to, uint tokens) public returns(bool success);
+    function totalSupply() virtual public view returns(uint);
+    function balanceOf(address tokenOwner) virtual public view returns(uint balance);
+    function allowance(address tokenOwner, address spender) virtual public view returns(uint remaining);
+    function transfer(address to, uint tokens) virtual public returns(bool success);
+    function approve(address spender, uint tokens) virtual public returns(bool success);
+    function approveAndCall(address spender, uint tokens, bytes memory data) virtual public returns(bool);
+    function transferFrom(address from, address to, uint tokens) virtual public returns(bool success);
     // function burnTokens(uint tokens) public returns(bool success); // for testing purposes only !
-    function purchaseTokens() external payable;
-    function purchaseEth(uint tokens) public;
-    function sellAllTokens() public;
-    function weiToTokens(uint weiPurchase) public view returns(uint);
-    function tokensToWei(uint tokens) public view returns(uint);
+    function purchaseTokens() virtual external payable;
+    function purchaseEth(uint tokens) virtual public;
+    function sellAllTokens() virtual public;
+    function weiToTokens(uint weiPurchase) virtual public view returns(uint);
+    function tokensToWei(uint tokens) virtual public view returns(uint);
     
     event Transfer(address indexed from, address indexed to, uint tokens);
     event Approval(address indexed tokenOwner, address indexed spender, uint tokens);
@@ -109,8 +112,8 @@ contract ERC20Interface {
 // ----------------------------------------------------------------------------
 // Contract function to receive approval and execute function in one call
 // ----------------------------------------------------------------------------
-contract ApproveAndCallFallBack {
-    function receiveApproval(address from, uint256 tokens, address token, bytes memory data) public;
+abstract contract ApproveAndCallFallBack {
+    function receiveApproval(address from, uint256 tokens, address token, bytes memory data) virtual public;
 }
 
 // ----------------------------------------------------------------------------
@@ -122,7 +125,7 @@ contract Owned {
 
     event OwnershipTransferred(address indexed _from, address indexed _to);
 
-    constructor() public {
+    constructor() {
         owner = msg.sender;
     }
 
@@ -155,7 +158,7 @@ contract _HERTZ is ERC20Interface, Owned {
 // The constructor function is called only once, and parameters are set.
 // We are making sure that the token owner becomes address(0), that is, no owner.
 // ------------------------------------------------------------------------------
-    constructor() public onlyOwner{
+    constructor() onlyOwner{
         if (constructorLocked) revert();
         constructorLocked = true; // a bullet-proof mechanism
 
@@ -174,7 +177,7 @@ contract _HERTZ is ERC20Interface, Owned {
 // ------------------------------------------------------------------------------
 // Total supply
 // ------------------------------------------------------------------------------
-    function totalSupply() public view returns(uint) {
+    function totalSupply() override public view returns(uint) {
         return _totalSupply;
     }
     
@@ -190,7 +193,7 @@ contract _HERTZ is ERC20Interface, Owned {
 // ------------------------------------------------------------------------------
 // Get the token balance for the account
 // ------------------------------------------------------------------------------
-    function balanceOf(address tokenOwner) public view returns(uint balance) {
+    function balanceOf(address tokenOwner) override public view returns(uint balance) {
         return balances[tokenOwner];
     }
 
@@ -200,7 +203,7 @@ contract _HERTZ is ERC20Interface, Owned {
 // - 0 value transfers are not allowed
 // - We cannot use this function to burn tokens
 // ------------------------------------------------------------------------
-    function transfer(address to, uint tokens) public returns(bool success) {
+    function transfer(address to, uint tokens) override public returns(bool success) {
         require(balances[msg.sender] >= tokens && tokens > 0, "Zero transfer or not enough funds");
         require(address(to) != address(0), "No burning allowed");
         require(address(msg.sender) != address(0), "You can't mint this token, purchase it instead");
@@ -231,7 +234,7 @@ contract _HERTZ is ERC20Interface, Owned {
 // Token owner can approve for `spender` to transferFrom(...) `tokens`
 // from the token owner's account
 // ------------------------------------------------------------------------
-    function approve(address spender, uint tokens) public returns(bool success) {
+    function approve(address spender, uint tokens) override public returns(bool success) {
         allowed[msg.sender][spender] = tokens;
         emit Approval(msg.sender, spender, tokens);
         return true;
@@ -247,7 +250,7 @@ contract _HERTZ is ERC20Interface, Owned {
 // - This function cannot be used for burning tokens.
 // - This function cannot be used for minting tokens.
 // ------------------------------------------------------------------------
-    function transferFrom(address from, address to, uint tokens) public returns(bool) {
+    function transferFrom(address from, address to, uint tokens) override public returns(bool) {
         require(balances[from] >= tokens && allowed[from][msg.sender] >= tokens && tokens > 0, "Zero transfer or not enough (allowed) funds");
         require(address(to) != address(0), "No burning allowed");
         require(address(from) != address(0), "You can't mint this token, purchase it instead");
@@ -276,7 +279,7 @@ contract _HERTZ is ERC20Interface, Owned {
 // ----------------------------------------------------------------------------------------------------
 // Returns the amount of tokens approved by the owner that can be transferred to the spender's account
 // ----------------------------------------------------------------------------------------------------
-    function allowance(address tokenOwner, address spender) public view returns(uint remaining) {
+    function allowance(address tokenOwner, address spender) override public view returns(uint remaining) {
         return allowed[tokenOwner][spender];
     }
 
@@ -285,7 +288,7 @@ contract _HERTZ is ERC20Interface, Owned {
 // from the token owner's account. The `spender` contract function
 // `receiveApproval(...)` is then executed
 // ------------------------------------------------------------------------
-    function approveAndCall(address spender, uint tokens, bytes memory data) public returns(bool) {
+    function approveAndCall(address spender, uint tokens, bytes memory data) override public returns(bool) {
         allowed[msg.sender][spender] = tokens;
         emit Approval(msg.sender, spender, tokens);
         ApproveAndCallFallBack(spender).receiveApproval(msg.sender, tokens, address(this), data);
@@ -311,7 +314,7 @@ contract _HERTZ is ERC20Interface, Owned {
 // - Decimals are included in the result
 // - There is no fee for purchasing tokens
 // -------------------------------------------------------------------------
-    function weiToTokens(uint weiPurchase) public view returns(uint) {
+    function weiToTokens(uint weiPurchase) override public view returns(uint) {
         if(_currentSupply==0 && weiDeposited==0 ) return weiPurchase; //initial step
         if(weiDeposited==0 || _currentSupply==0 || weiPurchase==0) return 0;
 
@@ -324,7 +327,7 @@ contract _HERTZ is ERC20Interface, Owned {
 // - You must include decimals for an input.
 // - There is 2% fee for converting to Ethereum
 // ----------------------------------------------------------------------------
-    function tokensToWei(uint tokens) public view returns(uint){
+    function tokensToWei(uint tokens) override public view returns(uint){
         if(tokens==0 || weiDeposited==0 || _currentSupply==0) return 0;
         uint ret = (weiDeposited.mul(tokens)).div(_currentSupply);
         ret = ret.sub(ret.div(50)); //2% fee, it stays to be shared with everyone
@@ -336,7 +339,7 @@ contract _HERTZ is ERC20Interface, Owned {
 // - Nobody collects Ethereum, it stays in a contract
 // - There is a no fee for purchasing Tokens
 // ------------------------------------------------------------------------
-    function purchaseTokens() external payable {
+    function purchaseTokens() override external payable {
         require(msg.value>0);
         
         uint tokens = weiToTokens(msg.value);
@@ -356,7 +359,7 @@ contract _HERTZ is ERC20Interface, Owned {
 // This is the function which allows us to exchange tokens back to Ethereum
 // - Burns deposited tokens, returns Ethereum.
 // ------------------------------------------------------------------------ 
-    function purchaseEth(uint tokens) public {
+    function purchaseEth(uint tokens) override public {
         require(tokens>0);
         uint getWei = tokensToWei(tokens);
         require(getWei>0);
@@ -364,7 +367,10 @@ contract _HERTZ is ERC20Interface, Owned {
         emit Transfer(msg.sender, address(0), tokens);
         balances[msg.sender] = balances[msg.sender].sub(tokens);
         _currentSupply = _currentSupply.sub(tokens);
-        address(msg.sender).transfer(getWei);
+        
+        address payable payableAddress = address(uint160(address(msg.sender)));
+        
+        payableAddress.transfer(getWei);
         weiDeposited = weiDeposited.sub(getWei);
     }
     
@@ -372,7 +378,7 @@ contract _HERTZ is ERC20Interface, Owned {
 // This is the function which allows us to exchange all tokens back to Ethereum
 // - Burns deposited tokens, returns Ethereum.
 // ------------------------------------------------------------------------ 
-    function sellAllTokens() public {
+    function sellAllTokens() override public {
         purchaseEth(balances[msg.sender]);
     }   
 }
